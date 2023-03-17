@@ -271,3 +271,10 @@ setTimeout(function() {
   const insertBeforeElement = document.querySelector("body > gradio-app").shadowRoot.querySelector("#img2img_column_size > div");
   insertBeforeElement.parentNode.insertBefore(parentElement, insertBeforeElement.nextSibling);
 }, 9000);
+
+//фикс просмотрщика картинок
+setTimeout(function() {
+  const lightboxModalDiv = document.querySelector("body > gradio-app").shadowRoot.querySelector("#lightboxModal > div");
+  lightboxModalDiv.classList.remove("gradio-container");
+  lightboxModalDiv.classList.add("modalControls");
+}, 9000);
