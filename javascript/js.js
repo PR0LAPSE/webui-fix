@@ -1,3 +1,4 @@
+//основной код скрипта
 setTimeout(function() {
 	console.clear();
 	// внедрение стилей
@@ -8,7 +9,7 @@ setTimeout(function() {
 	*/
 	`;
 	document.querySelector("body > gradio-app").shadowRoot.querySelector("style").insertAdjacentHTML("beforeend", styles);
-}, 500);
+}, 2000);
 
 // скрипт перемещения панели быстрых настроек в самый низ перед слоем footer
 window.addEventListener("load", function() {
@@ -46,7 +47,7 @@ window.addEventListener("load", function() {
       clearInterval(intervalId);
       return;
     }
-  }, 500);
+  }, 1000);
 });
 
 // новый инлайн-стиль body
@@ -57,34 +58,34 @@ const waitUntilLoaded = setInterval(() => {
     document.body.style.cssText = bodystyle;
     clearInterval(waitUntilLoaded);
   }
-}, 500);
+}, 1000);
 
 // изменение лейблов быстрых настроек
 setTimeout(function() {
   const extraNetworksSpan = document.querySelector("gradio-app").shadowRoot.querySelector("#setting_extra_networks_default_multiplier > div.w-full.flex.flex-col > div > label > span");
   setTimeout(() => {
     extraNetworksSpan.textContent = 'экстрасети';
-  }, 500);
+  }, 1000);
 
   const vaeSpan = document.querySelector("gradio-app").shadowRoot.querySelector("#setting_sd_vae_as_default > label > span");
   setTimeout(() => {
     vaeSpan.textContent = 'VAE от модели';
-  }, 500);
+  }, 1000);
 
   const clipSpan = document.querySelector("gradio-app").shadowRoot.querySelector("#setting_CLIP_stop_at_last_layers > div.w-full.flex.flex-col > div > label > span");
   setTimeout(() => {
     clipSpan.textContent = 'CLIP-skip';
-  }, 500);
+  }, 1000);
 
   const ImgOutputSpan = document.querySelector("gradio-app").shadowRoot.querySelector("#setting_do_not_show_images > label > span");
   setTimeout(() => {
     ImgOutputSpan.textContent = '';
-  }, 500);
+  }, 1000);
   
   const hypernetworkSpan = document.querySelector("body > gradio-app").shadowRoot.querySelector("#setting_sd_hypernetwork > label > span");
   setTimeout(() => {
     hypernetworkSpan.textContent = 'гиперсеть в запрос';
-  }, 500);
+  }, 1000);
   
 	//переместить кнопку
 	setTimeout(() => {
@@ -100,7 +101,7 @@ setTimeout(function() {
 		image_buttons_img2imgDiv.appendChild(save_img2imgButton);
 	}, 500);
 
-}, 500);
+}, 1000);
 
 // Функция для замены эмодзи на svg-иконки
 setTimeout(function() {
@@ -135,7 +136,7 @@ setTimeout(function() {
 		traverse(shadowRoot.shadowRoot);
 	  }
 	});
-}, 500);
+}, 1000);
 
 // добавление кнопочек очистки промптов по отдельности
 setTimeout(function() {
