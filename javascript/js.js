@@ -265,3 +265,9 @@ setTimeout(function() {
   const insertBeforeElement = document.querySelector("body > gradio-app").shadowRoot.querySelector("#txt2img_column_size > div");
   insertBeforeElement.parentNode.insertBefore(parentElement, insertBeforeElement.nextSibling);
 }, 9000);
+
+setTimeout(function() {
+  const parentElement = document.querySelector("body > gradio-app").shadowRoot.querySelector("#img2img_row_aspect_ratio").parentElement;
+  const insertBeforeElement = document.querySelector("body > gradio-app").shadowRoot.querySelector("#img2img_column_size > div");
+  insertBeforeElement.parentNode.insertBefore(parentElement, insertBeforeElement.nextSibling);
+}, 9000);
