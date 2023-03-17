@@ -9,7 +9,7 @@ setTimeout(function() {
 	*/
 	`;
 	document.querySelector("body > gradio-app").shadowRoot.querySelector("style").insertAdjacentHTML("beforeend", styles);
-}, 2000);
+}, 10000);
 
 // скрипт перемещения панели быстрых настроек в самый низ перед слоем footer
 window.addEventListener("load", function() {
@@ -47,7 +47,7 @@ window.addEventListener("load", function() {
       clearInterval(intervalId);
       return;
     }
-  }, 1000);
+  }, 10000);
 });
 
 // новый инлайн-стиль body
@@ -58,34 +58,34 @@ const waitUntilLoaded = setInterval(() => {
     document.body.style.cssText = bodystyle;
     clearInterval(waitUntilLoaded);
   }
-}, 1000);
+}, 10000);
 
 // изменение лейблов быстрых настроек
 setTimeout(function() {
   const extraNetworksSpan = document.querySelector("gradio-app").shadowRoot.querySelector("#setting_extra_networks_default_multiplier > div.w-full.flex.flex-col > div > label > span");
   setTimeout(() => {
     extraNetworksSpan.textContent = 'экстрасети';
-  }, 1000);
+  }, 10000);
 
   const vaeSpan = document.querySelector("gradio-app").shadowRoot.querySelector("#setting_sd_vae_as_default > label > span");
   setTimeout(() => {
     vaeSpan.textContent = 'VAE от модели';
-  }, 1000);
+  }, 10000);
 
   const clipSpan = document.querySelector("gradio-app").shadowRoot.querySelector("#setting_CLIP_stop_at_last_layers > div.w-full.flex.flex-col > div > label > span");
   setTimeout(() => {
     clipSpan.textContent = 'CLIP-skip';
-  }, 1000);
+  }, 10000);
 
   const ImgOutputSpan = document.querySelector("gradio-app").shadowRoot.querySelector("#setting_do_not_show_images > label > span");
   setTimeout(() => {
     ImgOutputSpan.textContent = '';
-  }, 1000);
+  }, 10000);
   
   const hypernetworkSpan = document.querySelector("body > gradio-app").shadowRoot.querySelector("#setting_sd_hypernetwork > label > span");
   setTimeout(() => {
     hypernetworkSpan.textContent = 'гиперсеть в запрос';
-  }, 1000);
+  }, 10000);
   
 	//переместить кнопку
 	setTimeout(() => {
@@ -101,7 +101,7 @@ setTimeout(function() {
 		image_buttons_img2imgDiv.appendChild(save_img2imgButton);
 	}, 500);
 
-}, 1000);
+}, 5000);
 
 // Функция для замены эмодзи на svg-иконки
 setTimeout(function() {
@@ -136,7 +136,7 @@ setTimeout(function() {
 		traverse(shadowRoot.shadowRoot);
 	  }
 	});
-}, 1000);
+}, 10000);
 
 // добавление кнопочек очистки промптов по отдельности
 setTimeout(function() {
@@ -154,7 +154,7 @@ setTimeout(function() {
 		});
 	  });
 	});
-}, 2000);
+}, 5000);
 
 
 // кнопка для отключения анимации фона
@@ -202,7 +202,7 @@ setTimeout(function() {
 		  }
 		});
 	}
-}, 1000);
+}, 5000);
 
 
 
@@ -217,7 +217,7 @@ upArrowDiv_create.innerHTML = `
 	`;
 gradioContainer.insertAdjacentElement('afterend', upArrowDiv_create);
 
-}, 500);
+}, 5000);
 setTimeout(function() {
 const upArrowDiv = document.querySelector("body > gradio-app").shadowRoot.querySelector("div.up_arrow");
 const upArrowObject = upArrowDiv.querySelector("object");
@@ -256,4 +256,12 @@ upArrowSvg.addEventListener("click", () => {
     behavior: "smooth"
   });
 });
-}, 2000);
+}, 5000);
+
+
+//перенос блока с заготовками соотношения сторон
+setTimeout(function() {
+  const parentElement = document.querySelector("body > gradio-app").shadowRoot.querySelector("#txt2img_row_aspect_ratio").parentElement;
+  const insertBeforeElement = document.querySelector("body > gradio-app").shadowRoot.querySelector("#txt2img_column_size > div");
+  insertBeforeElement.parentNode.insertBefore(parentElement, insertBeforeElement.nextSibling);
+}, 5000);
