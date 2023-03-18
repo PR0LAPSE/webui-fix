@@ -170,36 +170,61 @@ setTimeout(function() {
 	const isSmallScreen = (screenWidth <= 768);
 	bgAnimToggleDiv.classList.add('bg_anim_toggle');
 	versionsDiv.insertAdjacentElement('afterend', bgAnimToggleDiv);
+	// добавление облегченных стилей
+	function addBadStyles() {
+	  const badstyles = `
+		#available_extensions,#extensions,#extensions_installed_top>div,#quicksettings,#settings>div:first-child,#ti_gallery,#txt2img_extra_tabs>div.tabitem.p-2.border-2.border-t-0.border-gray-200.relative.flex,.flex.flex-col.relative.col.gap-4.gr-compact,.flex.flex-col.relative.col.gap-4.gr-panel,.gr-button:not([id*=res_switch]):not([id$=seed]):not([id*=refresh]):not(
+		textarea[rows="1"]
+		),.header_settings,fieldset,textarea{background-image:url("/file=./extensions-builtin/webui-fix/javascript/grain_dark_woblur.png")!important;backdrop-filter:blur(0px)!important}
+	  `;
+	  const styleElement = document.createElement("style");
+	  styleElement.setAttribute("data-badstyles", "");
+	  styleElement.innerHTML = badstyles;
+	  document.querySelector("body > gradio-app").shadowRoot.appendChild(styleElement);
+	}
+	// удаление облегченных стилей
+	function removeBadStyles() {
+	  const styleElement = document.querySelector("body > gradio-app").shadowRoot.querySelector("style[data-badstyles]");
+	  if (styleElement) {
+		styleElement.remove();
+	  }
+	}
 	const setStaticBg = () => {
 		gradioContainer.style.backgroundImage = 'url("/file=./extensions-builtin/webui-fix/javascript/bg_static.svg")';
+		
 		};
 	if (isMobile && isSmallScreen && (isAndroid || isiOS)) {
 		setStaticBg();
-		bgAnimToggleDiv.innerText = 'включить анимацию фона';
+		addBadStyles();
+		bgAnimToggleDiv.innerText = 'включить эффекты';
 		bgAnimToggleDiv.addEventListener('click', function() {
 		  if (gradioContainer.style.backgroundImage.includes('bg_static.svg')) {
 			// Вкл
-			bgAnimToggleDiv.innerText = 'отключить анимацию фона';
+			bgAnimToggleDiv.innerText = 'отключить эффекты';
 			gradioContainer.style.backgroundImage = '';
+			addBadStyles();
 		  } else {
 			// Выкл
-			bgAnimToggleDiv.innerText = 'включить анимацию фона';
+			bgAnimToggleDiv.innerText = 'включить эффекты';
 			setStaticBg();
+			removeBadStyles();
 		  }
 		});
 	}
 	else {
-		bgAnimToggleDiv.innerText = 'отключить анимацию фона';
+		bgAnimToggleDiv.innerText = 'отключить эффекты';
 		gradioContainer.style.backgroundImage = '';
 		bgAnimToggleDiv.addEventListener('click', function() {
 		  if (gradioContainer.style.backgroundImage.includes('bg_static.svg')) {
 			// Вкл
-			bgAnimToggleDiv.innerText = 'отключить анимацию фона';
+			bgAnimToggleDiv.innerText = 'отключить эффекты';
 			gradioContainer.style.backgroundImage = '';
+			removeBadStyles();
 		  } else {
 			// Выкл
-			bgAnimToggleDiv.innerText = 'включить анимацию фона';
+			bgAnimToggleDiv.innerText = 'включить эффекты';
 			setStaticBg();
+			addBadStyles();
 		  }
 		});
 	}
