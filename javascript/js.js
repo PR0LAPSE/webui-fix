@@ -77,7 +77,7 @@ function runTasks() {
 		/* например:
 		.container {color:red}
 		*/
-		
+		.autocompleteResults {left: 0.8em !important;}
 		`;
 		document.querySelector("body > gradio-app").shadowRoot.querySelector("style").insertAdjacentHTML("beforeend", styles);
 	}, 2000);
