@@ -7,6 +7,7 @@ setTimeout(function() {
 	/* например:
 	.container {color:red}
 	*/
+	.autocompleteResults {position: inherit!important;}
 	`;
 	document.querySelector("body > gradio-app").shadowRoot.querySelector("style").insertAdjacentHTML("beforeend", styles);
 }, 9000);
