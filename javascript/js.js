@@ -73,11 +73,25 @@ function runTasks() {
 	// внедрение перезаписывающих стилей
 	setTimeout(() => {
 		const styles = `
-		/* стили для переопределения с высоким приорететом! */
-		/* например:
-		.container {color:red}
-		*/
-		.autocompleteResults {left: 0.8em !important;}
+/* стили для переопределения с высоким приорететом! */
+/* например:
+.container {color:red}
+*/
+.autocompleteResults {left: 0.8em !important;}
+#txt2img_interrupt:hover,
+#txt2img_skip:hover,
+#img2img_interrupt:hover,
+#img2img_skip:hover {
+  border-color: #ca4a00!important;
+  background-color: #862000 !important;
+}
+#txt2img_interrupt,
+#txt2img_skip,
+#img2img_interrupt,
+#img2img_skip {
+  border-color: #ff7221!important;
+  background-color: #c83405 !important;
+}
 		`;
 		document.querySelector("body > gradio-app").shadowRoot.querySelector("style").insertAdjacentHTML("beforeend", styles);
 	}, 2000);
