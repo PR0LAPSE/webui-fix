@@ -292,7 +292,7 @@ function runTasks() {
 		const upArrowDiv_create = document.createElement('div');
 		upArrowDiv_create.classList.add('up_arrow');
 		upArrowDiv_create.innerHTML = `
-		<object type="image/svg+xml" data="/file=./extensions-builtin/arrow/javascript/arrow.svg"></object>
+		<object type="image/svg+xml" data="/file=./extensions-builtin/webui-fix/javascript/arrow.svg"></object>
 			`;
 		gradioContainer.insertAdjacentElement('afterend', upArrowDiv_create);
 	}, 9000);
