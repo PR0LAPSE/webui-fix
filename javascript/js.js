@@ -78,20 +78,6 @@ function runTasks() {
 .container {color:red}
 */
 .autocompleteResults {left: 0.8em !important;}
-#txt2img_interrupt:hover,
-#txt2img_skip:hover,
-#img2img_interrupt:hover,
-#img2img_skip:hover {
-  border-color: #ca4a00!important;
-  background-color: #862000 !important;
-}
-#txt2img_interrupt,
-#txt2img_skip,
-#img2img_interrupt,
-#img2img_skip {
-  border-color: #ff7221!important;
-  background-color: #c83405 !important;
-}
 		`;
 		document.querySelector("body > gradio-app").shadowRoot.querySelector("style").insertAdjacentHTML("beforeend", styles);
 	}, 2000);
@@ -245,9 +231,7 @@ function runTasks() {
 		// добавление облегченных стилей
 		function addBadStyles() {
 			const badstyles = `
-			#available_extensions,#extensions,#extensions_installed_top>div,#quicksettings,#settings>div:first-child,#ti_gallery,#txt2img_extra_tabs>div.tabitem.p-2.border-2.border-t-0.border-gray-200.relative.flex,.flex.flex-col.relative.col.gap-4.gr-compact,.flex.flex-col.relative.col.gap-4.gr-panel,.gr-button:not([id*=res_switch]):not([id$=seed]):not([id*=refresh]):not(
-			textarea[rows="1"]
-			),.header_settings,fieldset,textarea{background-image:url("/file=./extensions-builtin/webui-fix/javascript/grain_dark_woblur.png")!important;backdrop-filter:blur(0px)!important}
+			#available_extensions,#extensions,#extensions_installed_top > div,#quicksettings,#settings > div:first-child,#ti_gallery,#txt2img_extra_tabs> div.tabitem.p-2.border-2.border-t-0.border-gray-200.relative.flex,.flex.flex-col.relative.col.gap-4.gr-compact,.flex.flex-col.relative.col.gap-4.gr-panel,.gr-button:not([id*="res_switch"]):not([id$="seed"]):not([id*="refresh"]):not(textarea[rows="1"]),.header_settings,fieldset,textarea{background-image: url("/file=./extensions-builtin/webui-fix/javascript/grain_dark_woblur.png") !important;backdrop-filter: blur(0px) !important}#txt2img_interrupt:hover,#txt2img_skip:hover,#img2img_interrupt:hover,#img2img_skip:hover{border-color: #ca4a00 !important;background-color: #862000 !important}#txt2img_interrupt,#txt2img_skip,#img2img_interrupt,#img2img_skip{border-color: #ff7221 !important;background-color: #c83405 !important}
 		  `;
 			const styleElement = document.createElement("style");
 			styleElement.setAttribute("data-badstyles", "");
@@ -416,6 +400,50 @@ function runTasks() {
 		const lightboxModalDiv = document.querySelector("body > gradio-app").shadowRoot.querySelector("#lightboxModal > div");
 		lightboxModalDiv.classList.remove("gradio-container");
 		lightboxModalDiv.classList.add("modalControls");
+	}, 9000);
+	
+	// удаление расширений у имен моделей
+	setTimeout(() => {
+		function delExtModels() {
+			const selectModel = document.querySelector("body > gradio-app").shadowRoot.querySelector("#setting_sd_model_checkpoint > label > select");
+			if (selectModel) {
+				const optionsModel = selectModel.querySelectorAll("option");
+				optionsModel.forEach(function (option) {
+					let text = option.textContent;
+					text = text.replace(/(\.safetensors|\.ckpt|\.pt)/g, '');
+					option.textContent = text;
+				});
+			}
+		}
+
+		function delExtVae() {
+			const selectVae = document.querySelector("body > gradio-app").shadowRoot.querySelector("#setting_sd_vae > label > select");
+			if (selectVae) {
+				const optionsVae = selectVae.querySelectorAll("option");
+				optionsVae.forEach(function (option) {
+					let text = option.textContent;
+					text = text.replace(/(\.safetensors|\.ckpt|\.pt)/g, '');
+					option.textContent = text;
+				});
+			}
+		}
+
+		function delExtHypernet() {
+			const selectHypernet = document.querySelector("body > gradio-app").shadowRoot.querySelector("#setting_sd_hypernetwork > label > select");
+			if (selectHypernet) {
+				const optionsHypernet = selectHypernet.querySelectorAll("option");
+				optionsHypernet.forEach(function (option) {
+					let text = option.textContent;
+					text = text.replace(/(\.safetensors|\.ckpt|\.pt)/g, '');
+					option.textContent = text;
+				});
+			}
+		}
+
+
+		delExtModels();
+		delExtVae();
+		delExtHypernet();
 	}, 9000);
 
 }
