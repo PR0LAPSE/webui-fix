@@ -221,11 +221,36 @@ function runTasks() {
 		const gradioContainer = document.querySelector("body > gradio-app").shadowRoot.querySelector("div.gradio-container.dark");
 		const versionsDiv = document.querySelector("body > gradio-app").shadowRoot.querySelector("#footer > div.versions");
 		const bgAnimToggleDiv = document.createElement('div');
-		const isMobile = /Android|iPhone|iPad|iPod|/i.test(navigator.userAgent);
 		const isAndroid = /Android/i.test(navigator.userAgent);
 		const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-		const screenWidth = window.screen.width;
-		const isSmallScreen = (screenWidth <= 768);
+		const isMobile = navigator.userAgentData.mobile;
+		function factor(depth) {
+			var f = 1;
+			for (var i = 1; i < depth; i++) {
+				f = f * i;
+			}
+			return f;
+		}
+		function load(amount, depth) {
+			var t0 = performance.now();
+			for (var n = 1; n < amount; n++) {
+				var result = factor(depth);
+			}
+			var t1 = performance.now();
+			var duration = (t1 - t0).toFixed(0);
+			return duration;
+		}
+		var duration = load(10000, 20000);
+		const isPotato = (duration >= 200);
+		const Width = window.outerWidth;
+		const PixelRatio = window.devicePixelRatio;
+		let RealWidth = Width * PixelRatio;
+		if (isNaN(RealWidth)) {
+		  RealWidth = 1366; // будем считать что это старый ноут
+		  console.log("Разрешение экрана не определено и установлено как минимальное");
+		}
+		const isSmallScreen = (RealWidth <= 1900);
+		console.log("Ширина дисплея: " + RealWidth);
 		bgAnimToggleDiv.classList.add('bg_anim_toggle');
 		versionsDiv.insertAdjacentElement('afterend', bgAnimToggleDiv);
 		// добавление облегченных стилей
@@ -249,7 +274,7 @@ function runTasks() {
 			gradioContainer.style.backgroundImage = 'url("/file=./extensions-builtin/webui-fix/javascript/bg_static.svg")';
 
 		};
-		if (isMobile && isSmallScreen && (isAndroid || isiOS)) {
+		if (isSmallScreen || (isAndroid || isiOS || isMobile) || isPotato) {
 			setStaticBg();
 			addBadStyles();
 			bgAnimToggleDiv.innerText = 'включить эффекты';
