@@ -526,7 +526,7 @@ fieldset label:hover:not(.selected) {
 }
 
 		`;
-		document.querySelector("body > gradio-app > style").insertAdjacentHTML("beforeend", styles);
+		document.querySelector("body > gradio-app > div.gradio-container > style").insertAdjacentHTML("beforeend", styles);
 	}, 5000);
 	//перемещение вкладки настроек в конец
 	setTimeout(() => {
@@ -1151,6 +1151,10 @@ function findLastElement() {
 	if (lastElement) {
 		console.clear()
 		console.log("страница полностью загружена");
+		const gradioAppElement = document.querySelector('gradio-app');
+		const gradioContainerDiv = gradioAppElement.querySelector('div.gradio-container');
+		const BodyStyle = document.createElement('style');
+		gradioContainerDiv.appendChild(BodyStyle);
 		// выполнение кусков кода
 		runTasks();
 		return;
