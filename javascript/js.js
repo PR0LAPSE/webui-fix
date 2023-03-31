@@ -524,7 +524,21 @@ fieldset label:hover:not(.selected) {
 	border-radius: 0!important;
 	box-shadow: 0 0 10px #000;
 }
-
+#footer > div:nth-child(1) > a {
+	padding: 0 5px
+}
+#settings_restart_gradio, #tab_settings > div > div.gradio-row > div:nth-child(2),
+#download_localization{
+  display: none;
+}
+#settings_submit {
+  max-width: 350px;
+  height: 50px;
+  margin-top: 15px;
+  margin-bottom: -40px;
+  margin-left: auto;
+  margin-right: auto;
+}
 		`;
 		document.querySelector("body > gradio-app > div.gradio-container > style").insertAdjacentHTML("beforeend", styles);
 	}, 5000);
