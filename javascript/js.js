@@ -1162,3 +1162,11 @@ function findLastElement() {
 	setTimeout(findLastElement, 100);
 }
 findLastElement();
+// установка шага слайдеров размера на 64px
+	setTimeout(() => {
+		const SizeSliders = document.querySelectorAll('div[id$="_width"] > input[type=range], div[id$="_height"] > input[type=range]');
+		SizeSliders.forEach(input => {
+		  input.setAttribute('step', '64');
+		  console.log("установка шага слайдеров размера на 64px");
+		});
+}, 9000);
