@@ -539,6 +539,15 @@ fieldset label:hover:not(.selected) {
   margin-left: auto;
   margin-right: auto;
 }
+[id$="_random_subseed"] > div.icons,
+[id$="_reuse_subseed"] > div.icons {
+  position: relative !important;
+	top:-15px!important;
+}
+[id$="_random_subseed"] > div.icons > svg,
+[id$="_reuse_subseed"] > div.icons > svg {
+	transform: scale(0.7)!important
+}
 		`;
 		document.querySelector("body > gradio-app > div.gradio-container > style").insertAdjacentHTML("beforeend", styles);
 	}, 5000);
