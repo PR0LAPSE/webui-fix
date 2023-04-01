@@ -1107,6 +1107,13 @@ document.querySelector("#color_theme_select").addEventListener("blur", () => {
 			document.body.removeChild(a);
 		});
 	}, 20000);
+	setTimeout(() => {
+        // подсказки
+        const do_not_show_images = document.querySelector("#setting_do_not_show_images > label");
+        do_not_show_images.setAttribute("title", "не выводить изображения в результаты генерации. полезно если запускаешь пакетную генерацию, чтобы не нагружать ВебУИ");
+        const sd_vae_as_default = document.querySelector("#setting_sd_vae_as_default > label");
+        sd_vae_as_default.setAttribute("title", "если рядом с моделью лежит одноименный файл с VAE - использовать его");
+}, 5000);
 }
 
 
