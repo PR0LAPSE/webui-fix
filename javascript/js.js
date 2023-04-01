@@ -262,7 +262,7 @@ div[id$="_prompt_container"] {
 #txt2img_neg_prompt textarea,
 #img2img_neg_prompt textarea {
   color: #fce3e3!important;
-  height: 90x!important;
+  height: 85px!important;
 }
 .prompt_clear {
   fill: #ff000045;
@@ -542,11 +542,32 @@ fieldset label:hover:not(.selected) {
 [id$="_random_subseed"] > div.icons,
 [id$="_reuse_subseed"] > div.icons {
   position: relative !important;
-	top:-15px!important;
+  top:-15px!important;
 }
 [id$="_random_subseed"] > div.icons > svg,
 [id$="_reuse_subseed"] > div.icons > svg {
-	transform: scale(0.7)!important
+  transform: scale(0.7)!important
+}
+svg.svelte-zyxd38 {
+  display:none!important;
+}
+#settings > div.tab-nav.scroll-hide {
+  width: 200px!important;
+  margin-right: 10px!important;
+}
+#settings > div.tab-nav.scroll-hide > button {
+  padding-left: 0!important;
+  padding-right: 7px!important;
+}
+#settings > div.tab-nav.scroll-hide > button:nth-child(even) {
+  background-color: #ffffff0a!important;
+  min-width: 200px!important;
+}
+#settings > div.tab-nav.scroll-hide > button.selected {
+  background-color: #ffffff38!important;
+}
+#settings > div.tab-nav.scroll-hide > button:nth-child(19) {
+  display: none;
 }
 		`;
 		document.querySelector("body > gradio-app > div.gradio-container > style").insertAdjacentHTML("beforeend", styles);
