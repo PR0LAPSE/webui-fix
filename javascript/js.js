@@ -566,7 +566,7 @@ svg.svelte-zyxd38 {
 #settings > div.tab-nav.scroll-hide > button.selected {
   background-color: #ffffff38!important;
 }
-#settings > div.tab-nav.scroll-hide > button:nth-child(19) {
+#settings > div.tab-nav.scroll-hide > button:nth-last-child(2) {
   display: none;
 }
 		`;
