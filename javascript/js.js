@@ -7,7 +7,7 @@ function runTasks() {
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 @font-face {
   font-family: 'emodji_webui';
-  src: url('/file=./extensions-builtin/webui-fix/javascript/emodjiwebui.woff2');
+  src: url('/file=./extensions-builtin/fix-webui/javascript/emodjiwebui.woff2');
 }
 :root,
 html,
@@ -1015,7 +1015,7 @@ document.querySelector("#color_theme_select").addEventListener("blur", () => {
 		const upArrowDiv_create = document.createElement('div');
 		upArrowDiv_create.classList.add('up_arrow');
 		upArrowDiv_create.innerHTML = `
-		<object type="image/svg+xml" data="/file=./extensions-builtin/webui-fix/javascript/arrow.svg"></object>
+		<object type="image/svg+xml" data="/file=./extensions-builtin/fix-webui/javascript/arrow.svg"></object>
 			`;
 		gradioContainer.insertAdjacentElement('afterend', upArrowDiv_create);
 	}, 9000);
@@ -1200,7 +1200,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const loadlayer = document.createElement('div');
 	loadlayer.id = "loadlayer";
 	loadlayer.innerHTML = `
-	<script src="/file=./extensions-builtin/webui-fix/javascript/howler.min.js"></script>
+	<script src="/file=./extensions-builtin/fix-webui/javascript/howler.min.js"></script>
 	<style>
   #loadlayer{position:absolute;top:0;left:0;width:100%;height:100%;z-index:9999999;color:#fff;background:#000;display:flex;flex-direction:column;flex-wrap:wrap;align-content:center;justify-content:center;align-items:center}.loader{position:relative;top:15%;width:40px;height:40px}.loader .circle{position:absolute;width:38px;height:38px;opacity:0;transform:rotate(225deg);animation-iteration-count:infinite;animation-name:orbit;animation-duration:5.5s}.loader .circle:after{content:'';position:absolute;width:5px;height:5px;border-radius:5px;background:#fff}.loader .circle:nth-child(2){animation-delay:240ms}.loader .circle:nth-child(3){animation-delay:480ms}.loader .circle:nth-child(4){animation-delay:720ms}.loader .circle:nth-child(5){animation-delay:960ms}@keyframes orbit{0%{transform:rotate(225deg);opacity:1;animation-timing-function:ease-out}7%{transform:rotate(345deg);animation-timing-function:linear}30%{transform:rotate(455deg);animation-timing-function:ease-in-out}39%{transform:rotate(690deg);animation-timing-function:linear}70%{transform:rotate(815deg);opacity:1;animation-timing-function:ease-out}75%{transform:rotate(945deg);animation-timing-function:ease-out}76%{transform:rotate(945deg);opacity:0}100%{transform:rotate(945deg);opacity:0}}#molitva{width:50%!important}
 	</style>
@@ -1228,7 +1228,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class='loader'><div class='circle'></div><div class='circle'></div><div class='circle'></div><div class='circle'></div><div class='circle'></div></div>
 	`;
 	var sound = new Howl({
-	src: ['/file=./extensions-builtin/webui-fix/javascript/molitva.mp3']
+	src: ['/file=./extensions-builtin/fix-webui/javascript/molitva.mp3']
 	});
 	sound.play();
 	document.body.insertBefore(loadlayer, document.body.firstChild);
