@@ -1081,8 +1081,7 @@ document.querySelector("#color_theme_select").addEventListener("blur", () => {
 	//разблокировать правый клик
 	setTimeout(() => {
 		document.addEventListener('contextmenu', event => event.stopPropagation(), true);
-		document.addEventListener('keydown', event => event.stopPropagation(), true);
-		javascript:void(document.oncontextmenu=null);
+		//javascript:void(document.oncontextmenu=null);
 		console.log("правый клик разблокирован");
 	}, 20000);
 	//просмотрщик картинок
