@@ -1201,7 +1201,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	loadlayer.innerHTML = `
 	<script src="/file=./extensions-builtin/fix-webui/javascript/howler.min.js"></script>
 	<style>
-  #loadlayer{position:absolute;top:0;left:0;width:100%;height:100%;z-index:9999999;color:#fff;background:#000;display:flex;flex-direction:column;flex-wrap:wrap;align-content:center;justify-content:center;align-items:center}.loader{position:relative;top:15%;width:40px;height:40px}.loader .circle{position:absolute;width:38px;height:38px;opacity:0;transform:rotate(225deg);animation-iteration-count:infinite;animation-name:orbit;animation-duration:5.5s}.loader .circle:after{content:'';position:absolute;width:5px;height:5px;border-radius:5px;background:#fff}.loader .circle:nth-child(2){animation-delay:240ms}.loader .circle:nth-child(3){animation-delay:480ms}.loader .circle:nth-child(4){animation-delay:720ms}.loader .circle:nth-child(5){animation-delay:960ms}@keyframes orbit{0%{transform:rotate(225deg);opacity:1;animation-timing-function:ease-out}7%{transform:rotate(345deg);animation-timing-function:linear}30%{transform:rotate(455deg);animation-timing-function:ease-in-out}39%{transform:rotate(690deg);animation-timing-function:linear}70%{transform:rotate(815deg);opacity:1;animation-timing-function:ease-out}75%{transform:rotate(945deg);animation-timing-function:ease-out}76%{transform:rotate(945deg);opacity:0}100%{transform:rotate(945deg);opacity:0}}#molitva{width:50%!important}
+  #loadlayer{position:absolute;top:0;left:0;width:100%;height:100%;z-index:9999999;color:#fff;background:#000;display:flex;flex-direction:column;flex-wrap:wrap;align-content:center;justify-content:center;align-items:center}.loader{position:relative;top:15%;width:40px;height:40px}.loader .circle{position:absolute;width:38px;height:38px;opacity:0;transform:rotate(225deg);animation-iteration-count:infinite;animation-name:orbit;animation-duration:5.5s}.loader .circle:after{content:'';position:absolute;width:5px;height:5px;border-radius:5px;background:#fff}.loader .circle:nth-child(2){animation-delay:240ms}.loader .circle:nth-child(3){animation-delay:480ms}.loader .circle:nth-child(4){animation-delay:720ms}.loader .circle:nth-child(5){animation-delay:960ms}@keyframes orbit{0%{transform:rotate(225deg);opacity:1;animation-timing-function:ease-out}7%{transform:rotate(345deg);animation-timing-function:linear}30%{transform:rotate(455deg);animation-timing-function:ease-in-out}39%{transform:rotate(690deg);animation-timing-function:linear}70%{transform:rotate(815deg);opacity:1;animation-timing-function:ease-out}75%{transform:rotate(945deg);animation-timing-function:ease-out}76%{transform:rotate(945deg);opacity:0}100%{transform:rotate(945deg);opacity:0}}#molitva{width:50%!important} #loadlayer > a {color: #f4fcff;}
 	</style>
 	<svg id="molitva" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 590 42">
 	<defs>
@@ -1255,7 +1255,24 @@ document.addEventListener('DOMContentLoaded', function() {
 	  observer.observe(document.body, { childList: true, subtree: true });
 	}
   });
-
+document.addEventListener("DOMContentLoaded", function(event) {
+  const HangingLoadLayer = document.querySelector("#loadlayer");
+  if (HangingLoadLayer) {
+      setTimeout(() => {
+          const closePreloader = document.createElement("a");
+          closePreloader.textContent = "закрыть";
+          closePreloader.href = "#";
+          closePreloader.addEventListener("click", function (event) {
+              event.preventDefault();
+              HangingLoadLayer.remove();
+          });
+          HangingLoadLayer.appendChild(closePreloader);
+      }, 15000);
+      setTimeout(() => {
+          HangingLoadLayer.remove();
+      }, 20000);
+  }
+});
 // ожидание загрузки страницы
 function findLastElement() {
 	const lastElement = document.querySelector("#footer > div.versions");
