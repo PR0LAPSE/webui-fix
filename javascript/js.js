@@ -1206,7 +1206,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class='loader'><div class='circle'></div><div class='circle'></div><div class='circle'></div><div class='circle'></div><div class='circle'></div></div>
 	`;
 	var sound = new Howl({
-	src: ['/file=./extensions-builtin/fix-webui/javascript/loading.wav']
+	src: ['/file=./extensions-builtin/fix-webui/javascript/loading.mp3']
 	});
 	sound.play();
 	document.body.insertBefore(loadlayer, document.body.firstChild);
