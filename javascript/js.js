@@ -65,9 +65,9 @@ div[id$="_batch_count"] > div > div > label > span::after {
   visibility: visible!important;
   position: absolute!important;
   left: 999px!important;
-  min-width: 350px!important;
-  max-width: 350px!important;
-  width: 350px!important;
+  min-width: 250px!important;
+  max-width: 250px!important;
+  width: 250px!important;
 }
 .secondary.tool {
   background: none!important;
