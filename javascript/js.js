@@ -1113,6 +1113,214 @@ document.querySelector("#color_theme_select").addEventListener("blur", () => {
         const sd_vae_as_default = document.querySelector("#setting_sd_vae_as_default > label");
         sd_vae_as_default.setAttribute("title", "если рядом с моделью лежит одноименный файл с VAE - использовать его");
 }, 5000);
+// цитаты и молитвы
+let live_preview = false;
+fetch('file=config.json')
+    .then(response => response.json())
+    .then(config => {
+        if (config.live_previews_enable === true) {
+            live_preview = true;
+            console.log('live_preview = true');
+            show();
+        }
+    })
+    .catch(error => console.error('Ошибка загрузки файла config.json:', error));
+function generateRandomString(length) {
+    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    result += characters.charAt(Math.floor(Math.random() * 26));  // случайная буква a-z
+    for (let i = 1; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+}
+const randomString = generateRandomString(10);
+function show() {
+    // случайная строка из файла
+    async function getRandomLineFromFile() {
+        const response = await fetch('/file=./extensions-builtin/fix-webui/javascript/text.txt');
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim() !== '');
+        // получаем массив индексов всех строк в файле
+        const indices = Array.from({ length: lines.length }, (_, i) => i);
+        // перемешиваем массив индексов
+        for (let i = indices.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [indices[i], indices[j]] = [indices[j], indices[i]];
+        }
+        // выбираем индекс следующей строки, которую нужно показать
+        const lastLineIndex = parseInt(getCookie('lastLineIndex')) || -1;
+        let nextLineIndex = indices.pop();
+        if (nextLineIndex === lastLineIndex) {
+            nextLineIndex = indices.pop();
+        }
+        // если массив индексов пустой, то сбрасываем его и начинаем выборку заново
+        if (nextLineIndex === undefined) {
+            setCookie('lastLineIndex', -1);
+            return getRandomLineFromFile();
+        }
+        // сохраняем индекс следующей строки в куках
+        setCookie('lastLineIndex', nextLineIndex);
+        // возвращаем случайную строку из файла
+        return lines[nextLineIndex];
+    }
+    // создание модального окна
+    function createModal() {
+        const modal = document.createElement('div');
+        modal.id = `${randomString}modal_for_waiting`;
+        modal.innerHTML = `
+        <div class="${randomString}text"></div>
+        <style>
+        @font-face {
+            font-family: 'Ponomar Unicode';
+            src: url('https://sci.ponomar.net/fonts/PonomarUnicode.eot');
+            src: url('https://sci.ponomar.net/fonts/PonomarUnicode.eot?#iefix') format('embedded-opentype'), url('https://sci.ponomar.net/fonts/PonomarUnicode.woff2') format('woff2'), url('https://sci.ponomar.net/fonts/PonomarUnicode.woff') format('woff'), url('https://sci.ponomar.net/fonts/PonomarUnicode.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Old Standard TT';
+            src: url('/file=./extensions-builtin/fix-webui/javascript/subset-OldStandardTT-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Old Standard TT';
+            src: url('/file=./extensions-builtin/fix-webui/javascript/subset-OldStandardTT-Italic.woff2') format('woff2');
+            font-weight: normal;
+            font-style: italic;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Old Standard TT';
+            src: url('/file=./extensions-builtin/fix-webui/javascript/subset-OldStandardTT-Bold.woff2') format('woff2');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Indiction Unicode';
+            src: url('https://sci.ponomar.net/fonts/IndictionUnicode.eot');
+            src: url('https://sci.ponomar.net/fonts/IndictionUnicode.eot?#iefix') format('embedded-opentype'), url('https://sci.ponomar.net/fonts/IndictionUnicode.woff2') format('woff2'), url('https://sci.ponomar.net/fonts/IndictionUnicode.woff') format('woff'), url('https://sci.ponomar.net/fonts/IndictionUnicode.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        #${randomString}modal_for_waiting {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, .93);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999999;
+            flex-direction: column;
+            align-content: center;
+            flex-wrap: wrap;
+            font-family: 'Ponomar Unicode';
+        }
+        #${randomString}modal_for_waiting h1 {
+            color: white;
+            font-size: 2rem;
+            text-align: center;
+        }
+        #${randomString}modal_for_waiting p {
+            color: #cfcec6;
+            font-size: 1.2em;
+            text-align: left!important;
+            max-width: 70vw;
+        }
+        #${randomString}modal_for_waiting > div > p:not(.simple_text)::first-letter {
+            color: #e1333e;
+            font-size: 4em;
+            line-height: 1em;
+            vertical-align: top;
+            display: inline-block;
+            float: left;
+            margin: 15px 10px 0px 0px;
+            font-family: 'Indiction Unicode';
+        }
+        .russian {
+            font-family: 'Old Standard TT';
+        }
+        .slavonic::first-letter {
+            color: #fd1e21!important;
+            font-size: inherit!important;
+            line-height: inherit!important;
+            vertical-align: inherit!important;
+            display: inherit!important;
+            float: inherit!important;
+            margin: inherit!important;
+            font-family: inherit!important;
+        }
+        #${randomString}modal_for_waiting > div > img {
+            height: 100vh
+        }
+        </style>
+      `;
+        document.body.appendChild(modal);
+    }
+    // в куках запоминаем что показывали уже пользователю
+    function setCookie(name, value) {
+        document.cookie = `${name}=${value}; path=/`;
+    }
+    function getCookie(name) {
+        const matches = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+    // вывод модального окна с цитатами
+    createModal();
+    // получение рандомной строки из файла
+    getRandomLineFromFile().then(randomLine => {
+        const textElement = document.querySelector(`#${randomString}modal_for_waiting div.${randomString}text`);
+        textElement.innerHTML = randomLine;
+        var txtimgcount = parseInt(document.querySelector("#txt2img_batch_count > div.wrap > div.head > input[type=number]").value);
+        var toimgcount = parseInt(document.querySelector("#img2img_batch_count > div.wrap > div.head > input[type=number]").value);
+        if (txtimgcount > 1 || toimgcount > 1) {
+        setInterval(() => {
+            getRandomLineFromFile().then(newRandomLine => {
+                textElement.innerHTML = newRandomLine;
+            });
+        }, 50000); // обновляем если генерируют больше одной картинки
+    }
+    });
+}
+// удаление модального окна когда генерация закончилась
+function hide() {
+    document.querySelector(`#${randomString}modal_for_waiting`).remove()
+}
+// отслеживание
+const observer = new MutationObserver(mutationsList => {
+    // отслеживание старта генерации
+    for (let mutation of mutationsList) {
+        if (mutation.addedNodes.length > 0 && (mutation.target.id === 'txt2img_results' || mutation.target.id === 'img2img_results')) {
+            if (mutation.target.querySelector('.progressDiv') && !live_preview) {
+                show();
+                var text_div = document.querySelector(`#${randomString}modal_for_waiting > div`);
+                // если текст не влезает
+                if (text_div.scrollHeight > text_div.clientHeight) {
+                    text_div.style.transform = 'scale(' + (text_div.clientHeight / text_div.scrollHeight) + ')';
+                }
+            }
+        }
+        // отслеживание завершения генерации
+        if (mutation.removedNodes.length > 0 && (mutation.target.id === 'txt2img_results' || mutation.target.id === 'img2img_results')) {
+            if (mutation.target.querySelector('.progressDiv') === null && document.querySelector('#' + mutation.target.id)) {
+                hide();
+            }
+        }
+    }
+});
+const options = {
+    childList: true,
+    subtree: true
+};
+observer.observe(document, options);
 }
 
 
