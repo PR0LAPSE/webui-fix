@@ -1318,6 +1318,9 @@ if (!live_preview) {
                         if (text_div.scrollHeight > text_div.clientHeight) {
                             text_div.style.transform = 'scale(' + (text_div.clientHeight / text_div.scrollHeight) + ')';
                         }
+                        document.querySelector(`#${randomString}modal_for_waiting`).addEventListener("click", function() {
+                          hide();
+                        });
                     }
                 }
             }
@@ -1333,7 +1336,7 @@ if (!live_preview) {
                         live_checkbox = false
                         console.log("лайвпревью отключен");
                     }
-                    if (!LiveCheckbox.checked) { hide(); }
+                    if (!LiveCheckbox.checked) { if (document.querySelector(`#${randomString}modal_for_waiting`)) {hide();} }
                 }
             }
         }
