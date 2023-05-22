@@ -1115,62 +1115,51 @@ document.querySelector("#color_theme_select").addEventListener("blur", () => {
 }, 5000);
 
 
-// цитаты и молитвы
-let live_preview = false;
-fetch('file=config.json')
-    .then(response => response.json())
-    .then(config => {
-        if (config.live_previews_enable === true) {
-            live_preview = true;
-            console.log('live_preview = true');
-        }
-    })
-    .catch(error => console.error('Ошибка загрузки файла config.json:', error));
-if (!live_preview) {
-    function generateRandomString(length) {
-        const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-        let result = '';
-        result += characters.charAt(Math.floor(Math.random() * 26));  // случайная буква a-z
-        for (let i = 1; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() * characters.length));
-        }
-        return result;
+  // цитаты и молитвы
+  function generateRandomString(length) {
+    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    result += characters.charAt(Math.floor(Math.random() * 26));  // случайная буква a-z
+    for (let i = 1; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
-    const randomString = generateRandomString(10);
-    function show() {
-        // случайная строка из файла
-        async function getRandomLineFromFile() {
-            const response = await fetch('/file=./extensions-builtin/fix-webui/javascript/text.txt');
-            const text = await response.text();
-            const lines = text.split('\n').filter(line => line.trim() !== '');
-            // получаем массив индексов всех строк в файле
-            const indices = Array.from({ length: lines.length }, (_, i) => i);
-            // перемешиваем массив индексов
-            for (let i = indices.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [indices[i], indices[j]] = [indices[j], indices[i]];
-            }
-            // выбираем индекс следующей строки, которую нужно показать
-            const lastLineIndex = parseInt(getCookie('lastLineIndex')) || -1;
-            let nextLineIndex = indices.pop();
-            if (nextLineIndex === lastLineIndex) {
-                nextLineIndex = indices.pop();
-            }
-            // если массив индексов пустой, то сбрасываем его и начинаем выборку заново
-            if (nextLineIndex === undefined) {
-                setCookie('lastLineIndex', -1);
-                return getRandomLineFromFile();
-            }
-            // сохраняем индекс следующей строки в куках
-            setCookie('lastLineIndex', nextLineIndex);
-            // возвращаем случайную строку из файла
-            return lines[nextLineIndex];
-        }
-        // создание модального окна
-        function createModal() {
-            const modal = document.createElement('div');
-            modal.id = `${randomString}modal_for_waiting`;
-            modal.innerHTML = `
+    return result;
+  }
+  const randomString = generateRandomString(10);
+  function show() {
+    // случайная строка из файла
+    async function getRandomLineFromFile() {
+      const response = await fetch('/file=./extensions-builtin/fix-webui/javascript/text.txt');
+      const text = await response.text();
+      const lines = text.split('\n').filter(line => line.trim() !== '');
+      // получаем массив индексов всех строк в файле
+      const indices = Array.from({ length: lines.length }, (_, i) => i);
+      // перемешиваем массив индексов
+      for (let i = indices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [indices[i], indices[j]] = [indices[j], indices[i]];
+      }
+      // выбираем индекс следующей строки, которую нужно показать
+      const lastLineIndex = parseInt(getCookie('lastLineIndex')) || -1;
+      let nextLineIndex = indices.pop();
+      if (nextLineIndex === lastLineIndex) {
+        nextLineIndex = indices.pop();
+      }
+      // если массив индексов пустой, то сбрасываем его и начинаем выборку заново
+      if (nextLineIndex === undefined) {
+        setCookie('lastLineIndex', -1);
+        return getRandomLineFromFile();
+      }
+      // сохраняем индекс следующей строки в куках
+      setCookie('lastLineIndex', nextLineIndex);
+      // возвращаем случайную строку из файла
+      return lines[nextLineIndex];
+    }
+    // создание модального окна
+    function createModal() {
+      const modal = document.createElement('div');
+      modal.id = `${randomString}modal_for_waiting`;
+      modal.innerHTML = `
         <div class="${randomString}text"></div>
         <style>
         @font-face {
@@ -1211,20 +1200,20 @@ if (!live_preview) {
             font-display: swap;
         }
         #${randomString}modal_for_waiting {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, .93);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999999;
-            flex-direction: column;
-            align-content: center;
-            flex-wrap: wrap;
-            font-family: 'Ponomar Unicode';
+          position: unset;
+          top: 0px;
+          right: 10px;
+          width: auto;
+          height: 100%!important;
+          background-color: rgba(0, 0, 0, .93);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 9999999;
+          flex-direction: column;
+          align-content: center;
+          flex-wrap: wrap;
+          font-family: 'Ponomar Unicode';
         }
         #${randomString}modal_for_waiting h1 {
             color: white;
@@ -1261,95 +1250,63 @@ if (!live_preview) {
             font-family: inherit!important;
         }
         #${randomString}modal_for_waiting > div > img {
-            height: 100vh
+          position: unset;
+          width: 100%;
+          height: 450px;
         }
         </style>
       `;
-            document.body.appendChild(modal);
-        }
-        // в куках запоминаем что показывали уже пользователю
-        function setCookie(name, value) {
-            document.cookie = `${name}=${value}; path=/`;
-        }
-        function getCookie(name) {
-            const matches = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
-            return matches ? decodeURIComponent(matches[1]) : undefined;
-        }
-        // вывод модального окна с цитатами
-        createModal();
-        // получение рандомной строки из файла
-        getRandomLineFromFile().then(randomLine => {
-            const textElement = document.querySelector(`#${randomString}modal_for_waiting div.${randomString}text`);
-            textElement.innerHTML = randomLine;
-            var txtimgcount = parseInt(document.querySelector("#txt2img_batch_count > div.wrap > div.head > input[type=number]").value);
-            var toimgcount = parseInt(document.querySelector("#img2img_batch_count > div.wrap > div.head > input[type=number]").value);
-            if (txtimgcount > 1 || toimgcount > 1) {
-                setInterval(() => {
-                    getRandomLineFromFile().then(newRandomLine => {
-                        textElement.innerHTML = newRandomLine;
-                    });
-                }, 50000); // обновляем если генерируют больше одной картинки
-            }
+      //document.body.appendChild(modal);
+      document.querySelector("#html_info_txt2img").appendChild(modal);
+    }
+    // в куках запоминаем что показывали
+    function setCookie(name, value) {
+      document.cookie = `${name}=${value}; path=/`;
+    }
+    function getCookie(name) {
+      const matches = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+      return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+    // вывод модального окна с цитатами
+    createModal();
+    // получение рандомной строки из файла
+    getRandomLineFromFile().then(randomLine => {
+      const textElement = document.querySelector(`#${randomString}modal_for_waiting div.${randomString}text`);
+      textElement.innerHTML = randomLine;
+      setInterval(() => {
+        getRandomLineFromFile().then(newRandomLine => {
+          textElement.innerHTML = newRandomLine;
         });
-    }
-    // удаление модального окна когда генерация закончилась
-    function hide() {
-        document.querySelector(`#${randomString}modal_for_waiting`).remove()
-    }
-    // отслеживание
-    const observer = new MutationObserver(mutationsList => {
-        // отслеживание старта генерации
-        for (let mutation of mutationsList) {
-            if (mutation.addedNodes.length > 0 && (mutation.target.id === 'txt2img_results' || mutation.target.id === 'img2img_results')) {
-                if (mutation.target.querySelector('.progressDiv') && !live_preview) {
-                    var LiveCheckbox = document.querySelector("#setting_live_previews_enable > label > input");
-                    let live_checkbox = false;
-                    if (LiveCheckbox.checked) {
-                        live_checkbox = true
-                        console.log("включен лайвпревью");
-                    } else {
-                        live_checkbox = false
-                        console.log("лайвпревью отключен");
-                    }
-                    if (!LiveCheckbox.checked) {
-                        show();
-                        var text_div = document.querySelector(`#${randomString}modal_for_waiting > div`);
-                        // если текст не влезает
-                        if (text_div.scrollHeight > text_div.clientHeight) {
-                            text_div.style.transform = 'scale(' + (text_div.clientHeight / text_div.scrollHeight) + ')';
-                        }
-                        document.querySelector(`#${randomString}modal_for_waiting`).addEventListener("click", function() {
-                          hide();
-                        });
-                    }
-                }
-            }
-            // отслеживание завершения генерации
-            if (mutation.removedNodes.length > 0 && (mutation.target.id === 'txt2img_results' || mutation.target.id === 'img2img_results')) {
-                if (mutation.target.querySelector('.progressDiv') === null && document.querySelector('#' + mutation.target.id)) {
-                    var LiveCheckbox = document.querySelector("#setting_live_previews_enable > label > input");
-                    let live_checkbox = false;
-                    if (LiveCheckbox.checked) {
-                        live_checkbox = true
-                        console.log("включен лайвпревью");
-                    } else {
-                        live_checkbox = false
-                        console.log("лайвпревью отключен");
-                    }
-                    if (!LiveCheckbox.checked) { if (document.querySelector(`#${randomString}modal_for_waiting`)) {hide();} }
-                }
-            }
-        }
+      }, 50000);
     });
-    const options = {
-        childList: true,
-        subtree: true
-    };
-    observer.observe(document, options);
+  }
+  // удаление модального окна
+  function hide() {
+    document.querySelector(`#${randomString}modal_for_waiting`).remove()
+  }
+  // отслеживание
+  const observer = new MutationObserver(mutationsList => {
+    // отслеживание старта генерации
+    for (let mutation of mutationsList) {
+      if (mutation.addedNodes.length > 0 && (mutation.target.id === 'txt2img_results' || mutation.target.id === 'img2img_results')) {
+        if (mutation.target.querySelector('.progressDiv')) {
+          if (document.querySelector(`#${randomString}modal_for_waiting`)) { hide(); }
+          show();
+          var text_div = document.querySelector(`#${randomString}modal_for_waiting > div`);
+          // если текст не влезает
+          if (text_div.scrollHeight > text_div.clientHeight) {
+            text_div.style.transform = 'scale(' + (text_div.clientHeight / text_div.scrollHeight) + ')';
+          }
+        }
+      }
+    }
+  });
+  const options = {
+    childList: true,
+    subtree: true
+  };
+  observer.observe(document, options);
 }
-}
-
-
 //таймер колаба
 let startTime;
 let timeout;
