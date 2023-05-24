@@ -648,8 +648,9 @@ colorTheme.innerHTML = `
     <option value="theme2">натруженный пролапс</option>
     <option value="theme3">минет под одеялом</option>
     <option value="theme4">некроз препуция</option>
-	<option value="theme5">тоска по члену</option>
+	  <option value="theme5">тоска по члену</option>
     <option value="theme6">фистинг баклажаном</option>
+    <option value="theme7">кандидоз</option>
     <option value="">стандартная тема</option>
   </select>
   
@@ -881,6 +882,91 @@ filter: grayscale(1);
 }
 .autocompleteResultsList > li:nth-child(odd) {
   background-color: var(--body-background-fill);
+}
+  `,
+  `
+  * {
+	/* кандидоз */
+	--background-fill-primary: #f8f8f8 !important;
+	--body-background-fill: #fbfbfb !important;
+	--border-color-primary: #6f6f6f !important;
+	--input-background-fill: #f6f6f6 !important;
+	--button-primary-border-color: #f53c03 !important;
+	--button-primary-background-fill: #ff9100 !important;
+	--background-fill-secondary: #eee !important;
+	--button-secondary-background-fill: #d1d1d1 !important;
+	--button-secondary-background-fill-hover: #fafafa !important;
+	--button-secondary-border-color: #c4c4c4 !important;
+	--checkbox-label-background-fill: #ff009700 !important;
+	--checkbox-background-color: #f9f9f9 !important;
+	--checkbox-background-color-selected: #0078fc !important;
+	--checkbox-border-color-focus: #002fff !important;
+	--checkbox-border-color-hover: #8e8e8e !important;
+	--checkbox-border-color-selected: #00d9ff !important;
+	--checkbox-label-background-fill-hover: #a2a2a2 !important;
+	--button-primary-background-fill-hover: #b1b1b1 !important;
+	--button-secondary-text-color: #000 !important;
+	--body-text-color: #000 !important;
+	--neutral-200: #595959 !important;
+	--hue-rotate-checkbox: 0deg;
+	--slider-background: #bcb8b8 !important;
+	--slider-thumb: #0078fc !important;
+	--slider-focus: #9c9c9c !important;
+	--slider-fill-lower: #0078fc !important;
+}
+#txt2img_prompt textarea,
+#img2img_prompt textarea {
+	color: #0a8e18!important;
+}
+#txt2img_neg_prompt textarea,
+#img2img_neg_prompt textarea {
+	color: #a11b1b!important;
+}
+a:hover {
+	color: #0078fc !important;
+	text-decoration: underline !important;
+}
+ul.options {
+	background: #ddd !important;
+}
+li.selected.active {
+	background: #0078fc !important;
+}
+div[id$=modal_for_waiting] {
+	background: #eee !important;
+	color: #000 !important;
+}
+div[id$=modal_for_waiting] p {
+	color: #000 !important;
+}
+div[id$=modal_for_waiting] h1 {
+	color: #000 !important;
+}
+div#colab_model_list {
+	background: #fbfbfb !important;
+	color: #0f0f0f !important;
+}
+div#colab_model_list p {
+	color: #0f0f0f !important;
+}
+div#colab_model_list code {
+	background: none !important;
+	color: #39910e !important;
+}
+.autocompleteResults {
+	border-radius: 0!important;
+	background-color: #e2e1e1 !important;
+	border: 1px solid #6f6f6f !important;
+	box-shadow: 0 0 10px #000;
+}
+.autocompleteResultsList > li:nth-child(odd) {
+	background-color: #fbfbfb !important;
+}
+.autocompleteResultsList > li:hover {
+	background-color: #e4f3df !important;
+}
+body > gradio-app > div.up_arrow {
+	filter: invert(1)
 }
   `,
   `
