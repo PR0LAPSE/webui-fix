@@ -74,15 +74,16 @@ div[id$="_batch_count"] > div > div > label > span::after {
   border:none!important;
 }
 #quicksettings {
-  position: relative!important;
-  margin: 45px auto 15px auto!important;
-  padding: 30px!important;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center!important;
-  align-items: center!important;
+	position: relative!important;
+	margin: 45px auto 15px auto!important;
+	padding: 30px!important;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-content: center;
+	justify-content: center!important;
+	align-items: center!important;
+	width: 100% !important;
 }
 #quicksettings > div,
 #quicksettings > fieldset {
@@ -116,7 +117,7 @@ div[id$="_batch_count"] > div > div > label > span::after {
   min-width: 46px !important;
 }
 #setting_do_not_show_images > label {
-  top: 10px!important;
+  top: -12px!important;
   position: relative!important;
 }
 #setting_do_not_show_images > label > span {
@@ -167,6 +168,78 @@ svg#refresh {
 #quicksettings svg#refresh {
   --s: 20px;
   margin-top: calc(var(--s) / 2) !important;
+}
+#quicksettings #setting_save_images_before_face_restoration {
+	position: relative;
+	top: 18px!important;
+}
+#quicksettings #setting_sd_vae {
+	--sd_vae_w: 200px;
+	max-width: var(--sd_vae_w) !important;
+	min-width: var(--sd_vae_w) !important;
+	width: var(--sd_vae_w) !important;
+}
+#quicksettings #setting_img2img_color_correction {
+	--color_correction_w: 85px;
+	max-width: var(--color_correction_w) !important;
+	min-width: var(--color_correction_w) !important;
+	width: var(--color_correction_w) !important;
+	top: -10px;
+}
+#quicksettings #setting_img2img_background_color > label > input {
+	--color_w: 30px;
+	max-width: var(--color_w) !important;
+	min-width: var(--color_w) !important;
+	width: var(--color_w) !important;
+	position: relative;
+	top: -32px;
+	right: -6em;
+}
+#quicksettings #setting_img2img_background_color {
+	--background_color_w: 120px;
+	max-width: var(--background_color_w) !important;
+	min-width: var(--background_color_w) !important;
+	width: var(--background_color_w) !important;
+	top: 10px;
+}
+#quicksettings #setting_live_previews_enable {
+	--livep_w: 7em;
+	max-width: var(--livep_w) !important;
+	min-width: var(--livep_w) !important;
+	width: var(--livep_w) !important;
+}
+#quicksettings #setting_save_images_before_face_restoration {
+	--facerestore_w: 100px;
+	max-width: var(--facerestore_w) !important;
+	min-width: var(--facerestore_w) !important;
+	width: var(--facerestore_w) !important;
+	position: relative!important;
+	top: -8px!important;
+}
+#quicksettings #setting_disable_all_extensions {
+	--ext_disable_w: 168px;
+	max-width: var(--ext_disable_w) !important;
+	min-width: var(--ext_disable_w) !important;
+	width: var(--ext_disable_w) !important;
+}
+#quicksettings #setting_disable_all_extensions > div.wrap > label:nth-child(1) {
+	width: 70px !important;
+}
+#quicksettings #setting_CLIP_stop_at_last_layers,
+#quicksettings #setting_extra_networks_default_multiplier,
+#quicksettings #setting_code_former_weight,
+#quicksettings #setting_ldsr_steps {
+	--CLIP_stop_w: 188px;
+	max-width: var(--CLIP_stop_w) !important;
+	min-width: var(--CLIP_stop_w) !important;
+	width: var(--CLIP_stop_w) !important;
+}
+#quicksettings #setting_code_former_weight {
+	top: 7px!important;
+}
+#setting_code_former_weight > input[type="range"] {
+	/*direction: rtl!important;*/
+	transform: rotateY(180deg)!important;
 }
 .header_settings {
   width: 100%;
@@ -602,6 +675,33 @@ svg.svelte-zyxd38 {
 						header.textContent = 'быстрые настройки:';
 						quickSettings.insertAdjacentHTML('afterbegin', header.outerHTML);
 						footer_div.parentNode.insertBefore(quickSettings, footer_div);
+            // масштаб быстрых настроек
+            function updateScale() {
+              const screenWidth = window.innerWidth * (window.devicePixelRatio || 1);
+              console.log("ширина окна:", screenWidth);
+              function getScale(screenWidth) {
+                if (screenWidth < 1600) {
+                  return 1;
+                }
+                const slope1 = (0.720 - 0.603) / (1920 - 1600);
+                const intercept1 = 0.603 - slope1 * 1600;
+                const slope2 = (0.960 - 0.720) / (2560 - 1920);
+                const intercept2 = 0.720 - slope2 * 1920;
+                if (screenWidth <= 1920) {
+                  return slope1 * screenWidth + intercept1;
+                } else if (screenWidth <= 2560) {
+                  return slope2 * screenWidth + intercept2;
+                } else {
+                  return 1;
+                }
+              }
+              const scale = getScale(screenWidth);
+              console.log("масштаб быстрых настроек:", scale);
+              quickSettings.style.transform = `scale(${scale.toFixed(2)})`;
+              if (screenWidth < 1600) {quickSettings.style.flexWrap = "wrap";}else{quickSettings.style.flexWrap = "nowrap";}
+            }
+            updateScale();
+            window.addEventListener("resize", updateScale);
 						observer.disconnect();
 						clearInterval(intervalId);
 						return;
@@ -1026,6 +1126,28 @@ document.querySelector("#color_theme_select").addEventListener("blur", () => {
 		ImgOutputSpan.textContent = '';
 		const hypernetworkSpan = document.querySelector("#setting_sd_hypernetwork > label > span");
 		hypernetworkSpan.textContent = 'гиперсеть в запрос';
+    const bgSpan = document.querySelector("#setting_img2img_background_color > label > span");
+    bgSpan.textContent = 'фон изо-в-изо';
+    const img2imgColorcorrectionSpan = document.querySelector("#setting_img2img_color_correction > label > span");
+    img2imgColorcorrectionSpan.textContent = 'цветокор изо-в-изо';
+    const livepreviewSpan = document.querySelector("#setting_live_previews_enable > label > span");
+    livepreviewSpan.textContent = 'лайвпревью';
+    const backupBeforeFaceRestoreSpan = document.querySelector("#setting_save_images_before_face_restoration > label > span");
+    backupBeforeFaceRestoreSpan.textContent = 'бэкап перед codeformer';
+    backupBeforeFaceRestoreSpan.title = 'Сделать копию изображения перед восстановлением лица';
+    const LDSRstepsSpan = document.querySelector("#setting_ldsr_steps > div.wrap.svelte-1cl284s > div > label > span");
+    LDSRstepsSpan.textContent = 'шаги LDSR';
+    LDSRstepsSpan.title = 'кол-во шагов LDSR\nменьше = быстрее';
+    const codeformerSpan = document.querySelector("#setting_code_former_weight > div.wrap.svelte-1cl284s > div > label > span");
+    codeformerSpan.textContent = 'сила codeformer';
+    codeformerSpan.title = 'сила влияния codeformer: меньше = лучше!!!';
+    const disableExtSpan = document.querySelector("#setting_disable_all_extensions > span");
+    if (disableExtSpan) {disableExtSpan.textContent = 'все дополнения:';
+    document.querySelector("#setting_disable_all_extensions > div.wrap > label:nth-child(3)").style.display = 'none';
+    document.querySelector("#setting_disable_all_extensions > div.wrap > label:nth-child(1) > span").textContent = 'вкл.';
+    document.querySelector("#setting_disable_all_extensions > div.wrap > label:nth-child(2) > span").textContent = 'выкл.';};
+    document.querySelector("#hires_prompt > label > textarea").value = "high detail, sharpness, fine-textured, clarity, intricate, finely-detailed, accurate";
+    document.querySelector("#hires_neg_prompt > label > textarea").value = "low detail, blurred, low quality, unfocused, fuzzy image, unclear, hazy, murky, indistinct";
 	}, 9000);
 
 	// перемещение кнопки
