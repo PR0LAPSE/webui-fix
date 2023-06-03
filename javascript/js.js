@@ -642,6 +642,16 @@ svg.svelte-zyxd38 {
 #settings > div.tab-nav.scroll-hide > button:nth-last-child(2) {
   display: none;
 }
+#reload_frame {
+	cursor: pointer;
+	position: relative;
+	width: fit-content;
+	top: 4px;
+	left: 25px;
+}
+#reload_frame:active {
+	color:#fff
+}
 		`;
 		document.querySelector("body > gradio-app > div.gradio-container > style").insertAdjacentHTML("beforeend", styles);
 	}, 5000);
