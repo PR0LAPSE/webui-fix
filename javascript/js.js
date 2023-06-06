@@ -1410,43 +1410,6 @@ onUiLoaded(function () {
 	insertionPosition.parentNode.insertBefore(mainDiv, insertionPosition.nextSibling);
 	refreshTimer(timerEl);
 });
-
-// прелоадер :)
-document.addEventListener('DOMContentLoaded', function() {
-	const loadlayer = document.createElement('div');
-	loadlayer.id = "loadlayer";
-	loadlayer.innerHTML = `
-	<script src="/file=./extensions-builtin/fix-webui/javascript/howler.min.js"></script>
-	`;
-	var sound = new Howl({
-	src: ['/file=./extensions-builtin/fix-webui/javascript/loading.mp3']
-	});
-	sound.play();
-	document.body.insertBefore(loadlayer, document.body.firstChild);
-	const LastModifiedItem = document.querySelector("#setting_sd_vae_as_default > label > span");
-	const FullLoaded = new MutationObserver(mutations => {
-	  mutations.forEach(mutation => {
-		if (mutation.type === 'childList' && mutation.target.textContent === 'VAE от модели') {
-		 document.querySelector("#loadlayer").remove();
-		}
-	  });
-	});
-	if (LastModifiedItem) {
-	  FullLoaded.observe(LastModifiedItem, { childList: true });
-	} else {
-	  const observer = new MutationObserver(mutations => {
-		mutations.forEach(mutation => {
-		  if (mutation.addedNodes.length > 0) {
-			const newItem = mutation.addedNodes[0];
-			if (newItem.querySelector && newItem.querySelector("#setting_sd_vae_as_default > label > span")) {
-			  FullLoaded.observe(newItem.querySelector("#setting_sd_vae_as_default > label > span"), { childList: true });
-			}
-		  }
-		});
-	  });
-	  observer.observe(document.body, { childList: true, subtree: true });
-	}
-  });
 // ожидание загрузки страницы
 function findLastElement() {
 	const lastElement = document.querySelector("#footer > div.versions");
