@@ -74,16 +74,15 @@ div[id$="_batch_count"] > div > div > label > span::after {
   border:none!important;
 }
 #quicksettings {
-	position: relative!important;
-	margin: 45px auto 15px auto!important;
-	padding: 30px!important;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	align-content: center;
-	justify-content: center!important;
-	align-items: center!important;
-	width: 100% !important;
+  position: relative!important;
+  margin: 45px auto 15px auto!important;
+  padding: 30px!important;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center!important;
+  align-items: center!important;
 }
 #quicksettings > div,
 #quicksettings > fieldset {
@@ -117,7 +116,7 @@ div[id$="_batch_count"] > div > div > label > span::after {
   min-width: 46px !important;
 }
 #setting_do_not_show_images > label {
-  top: -12px!important;
+  top: 10px!important;
   position: relative!important;
 }
 #setting_do_not_show_images > label > span {
@@ -168,78 +167,6 @@ svg#refresh {
 #quicksettings svg#refresh {
   --s: 20px;
   margin-top: calc(var(--s) / 2) !important;
-}
-#quicksettings #setting_save_images_before_face_restoration {
-	position: relative;
-	top: 18px!important;
-}
-#quicksettings #setting_sd_vae {
-	--sd_vae_w: 200px;
-	max-width: var(--sd_vae_w) !important;
-	min-width: var(--sd_vae_w) !important;
-	width: var(--sd_vae_w) !important;
-}
-#quicksettings #setting_img2img_color_correction {
-	--color_correction_w: 85px;
-	max-width: var(--color_correction_w) !important;
-	min-width: var(--color_correction_w) !important;
-	width: var(--color_correction_w) !important;
-	top: -10px;
-}
-#quicksettings #setting_img2img_background_color > label > input {
-	--color_w: 30px;
-	max-width: var(--color_w) !important;
-	min-width: var(--color_w) !important;
-	width: var(--color_w) !important;
-	position: relative;
-	top: -32px;
-	right: -6em;
-}
-#quicksettings #setting_img2img_background_color {
-	--background_color_w: 120px;
-	max-width: var(--background_color_w) !important;
-	min-width: var(--background_color_w) !important;
-	width: var(--background_color_w) !important;
-	top: 10px;
-}
-#quicksettings #setting_live_previews_enable {
-	--livep_w: 7em;
-	max-width: var(--livep_w) !important;
-	min-width: var(--livep_w) !important;
-	width: var(--livep_w) !important;
-}
-#quicksettings #setting_save_images_before_face_restoration {
-	--facerestore_w: 100px;
-	max-width: var(--facerestore_w) !important;
-	min-width: var(--facerestore_w) !important;
-	width: var(--facerestore_w) !important;
-	position: relative!important;
-	top: -8px!important;
-}
-#quicksettings #setting_disable_all_extensions {
-	--ext_disable_w: 168px;
-	max-width: var(--ext_disable_w) !important;
-	min-width: var(--ext_disable_w) !important;
-	width: var(--ext_disable_w) !important;
-}
-#quicksettings #setting_disable_all_extensions > div.wrap > label:nth-child(1) {
-	width: 70px !important;
-}
-#quicksettings #setting_CLIP_stop_at_last_layers,
-#quicksettings #setting_extra_networks_default_multiplier,
-#quicksettings #setting_code_former_weight,
-#quicksettings #setting_ldsr_steps {
-	--CLIP_stop_w: 188px;
-	max-width: var(--CLIP_stop_w) !important;
-	min-width: var(--CLIP_stop_w) !important;
-	width: var(--CLIP_stop_w) !important;
-}
-#quicksettings #setting_code_former_weight {
-	top: 7px!important;
-}
-#setting_code_former_weight > input[type="range"] {
-	/*direction: rtl!important;*/
-	transform: rotateY(180deg)!important;
 }
 .header_settings {
   width: 100%;
@@ -642,16 +569,6 @@ svg.svelte-zyxd38 {
 #settings > div.tab-nav.scroll-hide > button:nth-last-child(2) {
   display: none;
 }
-#reload_frame {
-	cursor: pointer;
-	position: relative;
-	width: fit-content;
-	top: 4px;
-	left: 25px;
-}
-#reload_frame:active {
-	color:#fff
-}
 		`;
 		document.querySelector("body > gradio-app > div.gradio-container > style").insertAdjacentHTML("beforeend", styles);
 	}, 5000);
@@ -685,33 +602,6 @@ svg.svelte-zyxd38 {
 						header.textContent = 'быстрые настройки:';
 						quickSettings.insertAdjacentHTML('afterbegin', header.outerHTML);
 						footer_div.parentNode.insertBefore(quickSettings, footer_div);
-            // масштаб быстрых настроек
-            function updateScale() {
-              const screenWidth = window.innerWidth * (window.devicePixelRatio || 1);
-              console.log("ширина окна:", screenWidth);
-              function getScale(screenWidth) {
-                if (screenWidth < 1600) {
-                  return 1;
-                }
-                const slope1 = (0.720 - 0.603) / (1920 - 1600);
-                const intercept1 = 0.603 - slope1 * 1600;
-                const slope2 = (0.960 - 0.720) / (2560 - 1920);
-                const intercept2 = 0.720 - slope2 * 1920;
-                if (screenWidth <= 1920) {
-                  return slope1 * screenWidth + intercept1;
-                } else if (screenWidth <= 2560) {
-                  return slope2 * screenWidth + intercept2;
-                } else {
-                  return 1;
-                }
-              }
-              const scale = getScale(screenWidth);
-              console.log("масштаб быстрых настроек:", scale);
-              quickSettings.style.transform = `scale(${scale.toFixed(2)})`;
-              if (screenWidth < 1600) {quickSettings.style.flexWrap = "wrap";}else{quickSettings.style.flexWrap = "nowrap";}
-            }
-            updateScale();
-            window.addEventListener("resize", updateScale);
 						observer.disconnect();
 						clearInterval(intervalId);
 						return;
@@ -871,7 +761,6 @@ filter: hue-rotate(200deg) sepia(0.2);
   --neutral-900: #1d1c22 !important;
   --neutral-800: #29282e !important;
   --background-fill-primary: #0e0d11 !important;
-  --slider-background: #30343b !important;
 }
 input[type=checkbox].gr-check-radio.gr-checkbox {
 filter: hue-rotate(312deg) grayscale(0.65);
@@ -1137,28 +1026,6 @@ document.querySelector("#color_theme_select").addEventListener("blur", () => {
 		ImgOutputSpan.textContent = '';
 		const hypernetworkSpan = document.querySelector("#setting_sd_hypernetwork > label > span");
 		hypernetworkSpan.textContent = 'гиперсеть в запрос';
-    const bgSpan = document.querySelector("#setting_img2img_background_color > label > span");
-    bgSpan.textContent = 'фон изо-в-изо';
-    const img2imgColorcorrectionSpan = document.querySelector("#setting_img2img_color_correction > label > span");
-    img2imgColorcorrectionSpan.textContent = 'цветокор изо-в-изо';
-    const livepreviewSpan = document.querySelector("#setting_live_previews_enable > label > span");
-    livepreviewSpan.textContent = 'лайвпревью';
-    const backupBeforeFaceRestoreSpan = document.querySelector("#setting_save_images_before_face_restoration > label > span");
-    backupBeforeFaceRestoreSpan.textContent = 'бэкап перед codeformer';
-    backupBeforeFaceRestoreSpan.title = 'Сделать копию изображения перед восстановлением лица';
-    const LDSRstepsSpan = document.querySelector("#setting_ldsr_steps > div.wrap.svelte-1cl284s > div > label > span");
-    LDSRstepsSpan.textContent = 'шаги LDSR';
-    LDSRstepsSpan.title = 'кол-во шагов LDSR\nменьше = быстрее';
-    const codeformerSpan = document.querySelector("#setting_code_former_weight > div.wrap.svelte-1cl284s > div > label > span");
-    codeformerSpan.textContent = 'сила codeformer';
-    codeformerSpan.title = 'сила влияния codeformer: меньше = лучше!!!';
-    const disableExtSpan = document.querySelector("#setting_disable_all_extensions > span");
-    if (disableExtSpan) {disableExtSpan.textContent = 'все дополнения:';
-    document.querySelector("#setting_disable_all_extensions > div.wrap > label:nth-child(3)").style.display = 'none';
-    document.querySelector("#setting_disable_all_extensions > div.wrap > label:nth-child(1) > span").textContent = 'вкл.';
-    document.querySelector("#setting_disable_all_extensions > div.wrap > label:nth-child(2) > span").textContent = 'выкл.';};
-    document.querySelector("#hires_prompt > label > textarea").value = "high detail, sharpness, fine-textured, clarity, intricate, finely-detailed, accurate";
-    document.querySelector("#hires_neg_prompt > label > textarea").value = "low detail, blurred, low quality, unfocused, fuzzy image, unclear, hazy, murky, indistinct";
 	}, 9000);
 
 	// перемещение кнопки
@@ -1332,6 +1199,199 @@ document.querySelector("#color_theme_select").addEventListener("blur", () => {
         const sd_vae_as_default = document.querySelector("#setting_sd_vae_as_default > label");
         sd_vae_as_default.setAttribute("title", "если рядом с моделью лежит одноименный файл с VAE - использовать его");
 }, 5000);
+
+
+  // цитаты и молитвы
+  function generateRandomString(length) {
+    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    result += characters.charAt(Math.floor(Math.random() * 26));  // случайная буква a-z
+    for (let i = 1; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  }
+  const randomString = generateRandomString(10);
+  function show() {
+    // случайная строка из файла
+    async function getRandomLineFromFile() {
+      const response = await fetch('/file=./extensions-builtin/fix-webui/javascript/text.txt');
+      const text = await response.text();
+      const lines = text.split('\n').filter(line => line.trim() !== '');
+      // получаем массив индексов всех строк в файле
+      const indices = Array.from({ length: lines.length }, (_, i) => i);
+      // перемешиваем массив индексов
+      for (let i = indices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [indices[i], indices[j]] = [indices[j], indices[i]];
+      }
+      // выбираем индекс следующей строки, которую нужно показать
+      const lastLineIndex = parseInt(getCookie('lastLineIndex')) || -1;
+      let nextLineIndex = indices.pop();
+      if (nextLineIndex === lastLineIndex) {
+        nextLineIndex = indices.pop();
+      }
+      // если массив индексов пустой, то сбрасываем его и начинаем выборку заново
+      if (nextLineIndex === undefined) {
+        setCookie('lastLineIndex', -1);
+        return getRandomLineFromFile();
+      }
+      // сохраняем индекс следующей строки в куках
+      setCookie('lastLineIndex', nextLineIndex);
+      // возвращаем случайную строку из файла
+      return lines[nextLineIndex];
+    }
+    // создание модального окна
+    function createModal() {
+      const modal = document.createElement('div');
+      modal.id = `${randomString}modal_for_waiting`;
+      modal.innerHTML = `
+        <div class="${randomString}text"></div>
+        <style>
+        @font-face {
+            font-family: 'Ponomar Unicode';
+            src: url('https://sci.ponomar.net/fonts/PonomarUnicode.eot');
+            src: url('https://sci.ponomar.net/fonts/PonomarUnicode.eot?#iefix') format('embedded-opentype'), url('https://sci.ponomar.net/fonts/PonomarUnicode.woff2') format('woff2'), url('https://sci.ponomar.net/fonts/PonomarUnicode.woff') format('woff'), url('https://sci.ponomar.net/fonts/PonomarUnicode.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Old Standard TT';
+            src: url('/file=./extensions-builtin/fix-webui/javascript/subset-OldStandardTT-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Old Standard TT';
+            src: url('/file=./extensions-builtin/fix-webui/javascript/subset-OldStandardTT-Italic.woff2') format('woff2');
+            font-weight: normal;
+            font-style: italic;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Old Standard TT';
+            src: url('/file=./extensions-builtin/fix-webui/javascript/subset-OldStandardTT-Bold.woff2') format('woff2');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Indiction Unicode';
+            src: url('https://sci.ponomar.net/fonts/IndictionUnicode.eot');
+            src: url('https://sci.ponomar.net/fonts/IndictionUnicode.eot?#iefix') format('embedded-opentype'), url('https://sci.ponomar.net/fonts/IndictionUnicode.woff2') format('woff2'), url('https://sci.ponomar.net/fonts/IndictionUnicode.woff') format('woff'), url('https://sci.ponomar.net/fonts/IndictionUnicode.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        #${randomString}modal_for_waiting {
+          position: unset;
+          top: 0px;
+          right: 10px;
+          width: auto;
+          height: 100%!important;
+          background-color: rgba(0, 0, 0, .93);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 9999999;
+          flex-direction: column;
+          align-content: center;
+          flex-wrap: wrap;
+          font-family: 'Ponomar Unicode';
+        }
+        #${randomString}modal_for_waiting h1 {
+            color: white;
+            font-size: 2rem;
+            text-align: center;
+        }
+        #${randomString}modal_for_waiting p {
+            color: #cfcec6;
+            font-size: 1.2em;
+            text-align: left!important;
+            max-width: 70vw;
+        }
+        #${randomString}modal_for_waiting > div > p:not(.simple_text)::first-letter {
+            color: #e1333e;
+            font-size: 4em;
+            line-height: 1em;
+            vertical-align: top;
+            display: inline-block;
+            float: left;
+            margin: 15px 10px 0px 0px;
+            font-family: 'Indiction Unicode';
+        }
+        .russian {
+            font-family: 'Old Standard TT';
+        }
+        .slavonic::first-letter {
+            color: #fd1e21!important;
+            font-size: inherit!important;
+            line-height: inherit!important;
+            vertical-align: inherit!important;
+            display: inherit!important;
+            float: inherit!important;
+            margin: inherit!important;
+            font-family: inherit!important;
+        }
+        #${randomString}modal_for_waiting > div > img {
+          position: unset;
+          width: 100%;
+          height: 450px;
+        }
+        </style>
+      `;
+      //document.body.appendChild(modal);
+      document.querySelector("#html_info_txt2img").appendChild(modal);
+    }
+    // в куках запоминаем что показывали
+    function setCookie(name, value) {
+      document.cookie = `${name}=${value}; path=/`;
+    }
+    function getCookie(name) {
+      const matches = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+      return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+    // вывод модального окна с цитатами
+    createModal();
+    // получение рандомной строки из файла
+    getRandomLineFromFile().then(randomLine => {
+      const textElement = document.querySelector(`#${randomString}modal_for_waiting div.${randomString}text`);
+      textElement.innerHTML = randomLine;
+      setInterval(() => {
+        getRandomLineFromFile().then(newRandomLine => {
+          textElement.innerHTML = newRandomLine;
+        });
+      }, 50000);
+    });
+  }
+  // удаление модального окна
+  function hide() {
+    document.querySelector(`#${randomString}modal_for_waiting`).remove()
+  }
+  // отслеживание
+  const observer = new MutationObserver(mutationsList => {
+    // отслеживание старта генерации
+    for (let mutation of mutationsList) {
+      if (mutation.addedNodes.length > 0 && (mutation.target.id === 'txt2img_results' || mutation.target.id === 'img2img_results')) {
+        if (mutation.target.querySelector('.progressDiv')) {
+          if (document.querySelector(`#${randomString}modal_for_waiting`)) { hide(); }
+          show();
+          var text_div = document.querySelector(`#${randomString}modal_for_waiting > div`);
+          // если текст не влезает
+          if (text_div.scrollHeight > text_div.clientHeight) {
+            text_div.style.transform = 'scale(' + (text_div.clientHeight / text_div.scrollHeight) + ')';
+          }
+        }
+      }
+    }
+  });
+  const options = {
+    childList: true,
+    subtree: true
+  };
+  observer.observe(document, options);
 }
 //таймер колаба
 let startTime;
