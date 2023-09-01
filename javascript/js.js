@@ -854,13 +854,6 @@ function moving_quicksettings() {
           document.querySelector("#txt2img_settings #setting_auto_vae_precision > label > span").textContent = "авто fp32";
           txt_vae_force.style.cssText = `width: 0px; height: 0px; margin: 0; padding: 0; position: relative; left: 30px; top: -30px;`;
           txt_vae_fp32.style.cssText = `width: max-content; height: 0px; margin: 0; padding: 0; position: relative; left: 60px; top: -32.6px;`;
-          
-
-          
-        
-          
-          
-
           var IMGVAEdencSet = document.querySelector("#img2img_settings #setting_sd_vae_decode_method").parentElement.parentElement.parentElement.parentElement;
           var IMGVAEencSet = document.querySelector("#img2img_settings #setting_sd_vae_encode_method").parentElement.parentElement.parentElement.parentElement;
           var IMGvaesets = document.createElement("div");
@@ -872,7 +865,6 @@ function moving_quicksettings() {
           IMGVAEdencSet.parentNode.insertBefore(IMGvaesets, IMGVAEdencSet);
           IMGvaesets.appendChild(IMGVAEdencSet);
           IMGvaesets.appendChild(IMGVAEencSet);
-
           var img_vae_fp32 = document.querySelector("#img2img_settings #setting_auto_vae_precision").parentElement.parentElement.parentElement.parentElement;
           var img_vae_force = document.querySelector("#img2img_settings #setting_sd_vae_overrides_per_model_preferences").parentElement.parentElement.parentElement.parentElement;
           var img_vae_selector = document.querySelector("#img2img_settings #setting_sd_vae").parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
@@ -895,7 +887,6 @@ function moving_quicksettings() {
           document.querySelector("#img2img_settings #setting_auto_vae_precision > label > span").textContent = "авто fp32";
           img_vae_force.style.cssText = `width: 0px; height: 0px; margin: 0; padding: 0; position: relative; left: 30px; top: -30px;`;
           img_vae_fp32.style.cssText = `width: max-content; height: 0px; margin: 0; padding: 0; position: relative; left: 60px; top: -32.6px;`;
-
 
           var txt_SDXLlowaesthetic = document.querySelector("#txt2img_settings #setting_sdxl_refiner_low_aesthetic_score").parentElement.parentElement.parentElement.parentElement;
           var txt_SDXLhighaesthetic = document.querySelector("#txt2img_settings #setting_sdxl_refiner_high_aesthetic_score").parentElement.parentElement.parentElement.parentElement;
@@ -981,11 +972,6 @@ function moving_quicksettings() {
           livepreview.parentNode.insertBefore(previewParam, livepreview);
           previewParam.appendChild(livepreview);
           previewParam.appendChild(hideOutImg);
-
-
-
-          
-          
 
           // установка шага слайдеров размера на 64px
           const SizeSliders = document.querySelectorAll('div[id$="_width"] > input[type=range], div[id$="_height"] > input[type=range]');
@@ -1081,7 +1067,6 @@ function replaceSymbols() {
 
   ARobserver.observe(document.body, { childList: true, subtree: true });
 }
-
 
 // цветовые схемы
 function inject_themes() {
