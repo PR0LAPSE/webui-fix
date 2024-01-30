@@ -1,8 +1,6 @@
 // внедрение перезаписывающих стилей
 function inject_css() {
   console.log("инъекция css в body");
-  const BodyStyle = document.createElement('style');
-  document.querySelector("body > gradio-app > div.gradio-container").appendChild(BodyStyle);
   const styles = `
   @import "https://fonts.fontstorage.com/import/ptsansnarrow.css";
   @import "https://fonts.fontstorage.com/import/osanscondensed.css";
@@ -111,70 +109,7 @@ function inject_css() {
     background: none!important;
     border: none!important;
   }
-  #quicksettings {
-    position: relative!important;
-    margin-top: 50px;
-    margin-bottom: 45px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0px!important;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    max-width: 1300px !important;
-    left: 90px;
-  }
-  #quicksettings > div,
-  #quicksettings > fieldset {
-    height: 47px !important;
-    padding: 0 !important;
-    border: none!important;
-    box-shadow: none!important;
-    margin-right: 10px!important;
-    background: rgba(0, 0, 0, 0) !important;
-  }
-  #quicksettings > div:not(#setting_sd_vae_as_default),
-  #quicksettings > div:not(#setting_do_not_show_images),
-  #quicksettings > fieldset {
-    max-width: 250px;
-    min-width: 250px;
-    width: 250px;
-  }
-  #quicksettings > div:not(#setting_do_not_show_images) > label {
-    display: inline-block;
-    width: 176px;
-  }
-  #setting_sd_vae_as_default,
-  #setting_sd_vae_as_default span,
-  #setting_sd_vae_as_default > label,
-  #setting_sd_vae_as_default > label > span {
-    width: 80px !important;
-    max-width: 80px !important;
-    min-width: 80px !important;
-    line-height: 16px!important;
-    top: 8px!important;
-  }
-  #quicksettings #setting_CLIP_stop_at_last_layers > input[type=range] {
-    position: relative;
-    top: 4px!important;
-  }
-  #quicksettings #setting_sd_vae_as_default {
-    position: relative;
-    top: 13px!important;
-  }
-  #quicksettings #setting_CLIP_stop_at_last_layers,
-  #quicksettings #setting_extra_networks_default_multiplier {
-    position: relative;
-    top: 8px
-  }
-  #quicksettings > button:nth-child(n) {
-    padding: 0 !important;
-    position: relative!important;
-    left: -25px!important;
-  }
+  
   svg#refresh {
     --s: 20px;
     width: var(--s) !important;
@@ -182,176 +117,12 @@ function inject_css() {
     max-width: var(--s) !important;
     min-width: var(--s) !important;
   }
-  #quicksettings svg#refresh {
-    --s: 20px;
-    margin-top: calc(var(--s) / 2) !important;
-  }
-  #quicksettings #setting_save_images_before_face_restoration {
-    position: relative;
-    top: 18px!important;
-  }
-  #setting_face_restoration {
-    z-index: 1 !important;
-  }
-  #quicksettings #setting_sd_vae {
-    --sd_vae_w: 200px;
-    max-width: var(--sd_vae_w) !important;
-    min-width: var(--sd_vae_w) !important;
-    width: var(--sd_vae_w) !important;
-  }
-  #quicksettings #setting_img2img_color_correction {
-    --color_correction_w: 85px;
-    max-width: var(--color_correction_w) !important;
-    min-width: var(--color_correction_w) !important;
-    width: var(--color_correction_w) !important;
-    top: -10px;
-  }
-  #quicksettings #setting_img2img_background_color > label > input {
-    --color_w: 30px;
-    max-width: var(--color_w) !important;
-    min-width: var(--color_w) !important;
-    width: var(--color_w) !important;
-    position: relative;
-    top: -32px;
-    right: -6em;
-  }
-  #quicksettings #setting_img2img_background_color {
-    --background_color_w: 120px;
-    max-width: var(--background_color_w) !important;
-    min-width: var(--background_color_w) !important;
-    width: var(--background_color_w) !important;
-    top: 10px;
-  }
-  #quicksettings #setting_save_images_before_face_restoration {
-    --facerestore_w: 100px;
-    max-width: var(--facerestore_w) !important;
-    min-width: var(--facerestore_w) !important;
-    width: var(--facerestore_w) !important;
-    position: relative!important;
-    top: -8px!important;
-  }
-  #quicksettings #setting_disable_all_extensions {
-    --ext_disable_w: 168px;
-    max-width: var(--ext_disable_w) !important;
-    min-width: var(--ext_disable_w) !important;
-    width: var(--ext_disable_w) !important;
-  }
-  #quicksettings #setting_disable_all_extensions > div.wrap > label:nth-child(1) {
-    width: 70px !important;
-  }
-  div#quicksettings div#setting_lora_functional,
-  div#quicksettings div#setting_use_old_scheduling,
-  div#quicksettings div#setting_lora_functional > label,
-  div#quicksettings div#setting_use_old_scheduling > label,
-  div#quicksettings div#setting_upcast_attn,
-  #legacy_param,
-  #setting_do_not_show_images {
-    min-width: 0px !important;
-  }
-  div#quicksettings div#setting_lora_functional,
-  div#quicksettings div#setting_use_old_scheduling,
-  div#quicksettings div#setting_lora_functional > label,
-  div#quicksettings div#setting_use_old_scheduling > label,
-  #legacy_param {
-    width: 110px;
-  }
-  div#quicksettings #setting_do_not_show_images,
-  div#quicksettings #setting_live_previews_enable,
-  div#quicksettings #setting_do_not_show_images > label,
-  div#quicksettings #setting_live_previews_enable > label,
-  #preview_param {
-    width: 145px !important;
-    min-width: 0 !important;
-  }
-  #legacy_param,
-  #preview_param {
-    position: relative;
-    padding: 0 !important;
-    margin: 0!important;
-    gap: 0 !important;
-    left: -75px !important;
-    top: -5px;
-  }
-  #preview_param {
-    left: -116px !important;
-  }
-  #codeformer_param {
-    position: relative;
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    align-items: center;
-    right: 125px;
-    top: 3px;
-  }
-  #cross_attn_param {
-    position: relative;
-    left: -145px
-  }
-  #setting_cross_attention_optimization > label > div > div.wrap-inner {
-    padding: 0 !important;
-  }
-  #setting_cross_attention_optimization > label {
-    position: relative;
-    top: 5px !important;
-  }
-  #setting_cross_attention_optimization > label > div > ul {
-    bottom: 30px !important
-  }
-  div#setting_face_restoration.padded,
-  div#setting_face_restoration > label {
-    min-width: 100px !important;
-    width: 100px !important;
-    height: 20px !important;
-    padding: 0 !important;
-    left: 125px;
-    top: -12px;
-  }
-  #setting_disable_all_extensions {
-    position: relative;
-    left: -150px;
-    top: 0px;
-  }
-  #quicksettings #setting_upcast_attn,
-  #quicksettings #setting_upcast_attn > label {
-    min-width: 0 !important;
-    width: 90px !important
-  }
-  #quicksettings #setting_upcast_attn {
-    position: relative;
-    bottom: 60px;
-    right: -165px;
-  }
-  #quicksettings #setting_CLIP_stop_at_last_layers,
-  #quicksettings #setting_extra_networks_default_multiplier,
-  #quicksettings #setting_code_former_weight,
-  #quicksettings #setting_ldsr_steps {
-    --CLIP_stop_w: 188px;
-    max-width: var(--CLIP_stop_w) !important;
-    min-width: var(--CLIP_stop_w) !important;
-    width: var(--CLIP_stop_w) !important;
-  }
-  #quicksettings #setting_code_former_weight {
-    top: 7px!important;
-  }
-  #quicksettings > div.gradio-dropdown {
-    min-width: fit-content !important;
-  }
+  
   #setting_code_former_weight > input[type="range"] {
     /*direction: rtl!important;*/
     transform: rotateY(180deg)!important;
   }
-  .header_settings {
-    text-align: center;
-    position: absolute;
-    top: -50px;
-		width: max-content;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 1;
-    font-size: 1.5em!important;
-		padding-right: 198px;
-  }
+  
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     opacity: 0 !important;
@@ -632,7 +403,7 @@ function inject_css() {
     content: "˅"!important;
     position: relative!important;
     display: block!important;
-    z-index: 9999!important;
+    z-index: 999!important;
     font-family: monospace !important;
     font-size: 2em !important;
     top: 10px !important;
@@ -780,8 +551,261 @@ function inject_css() {
     justify-content: flex-start;
     width: 350px;
   }
-		`;
-  document.querySelector("body > gradio-app > div.gradio-container > style").insertAdjacentHTML("beforeend", styles);
+
+  #quicksettings > div.gradio-dropdown {
+      min-width: initial !important;
+  }
+
+  #quicksettings #setting_sd_model_checkpoint {
+      --w: 230px;
+      width: var(--w) !important;
+      max-width: var(--w) !important;
+      min-width: var(--w) !important;
+  }
+
+  div#setting_sd_vae_overrides_per_model_preferences,
+  #setting_sd_vae_overrides_per_model_preferences > * {
+      width: fit-content !important;
+      min-width: 10px !important;
+      height: 10px !important;
+      min-height: 10px !important;
+  }
+
+  div#setting_auto_vae_precision,
+  #setting_auto_vae_precision,
+  #setting_auto_vae_precision > label,
+  div#setting_taesd,
+  #ssetting_taesd,
+  #setting_taesd > label {
+      width: fit-content !important;
+      min-width: 10px !important;
+      height: 10px !important;
+      min-height: 10px !important;
+  }
+
+  div#vae_checkboxes {
+      display: flex !important;
+      max-width: max-content;
+  }
+  div#setting_auto_vae_precision,
+  div#setting_sd_vae_overrides_per_model_preferences,
+  div#setting_taesd {
+      padding: 0 !important;
+      margin: 0 0 7px 0 !important
+  }
+  div#setting_auto_vae_precision,
+  div#setting_taesd {
+      padding-left: 22px !important;
+  }
+  #setting_sd_vae_encode_method,
+  #setting_sd_vae_decode_method {
+      display: none !important;
+  }
+
+  #quicksettings #setting_CLIP_stop_at_last_layers,
+  #quicksettings #setting_extra_networks_default_multiplier,
+  #quicksettings #setting_ldsr_steps {
+      --CLIP_stop_w: 118px;
+      max-width: var(--CLIP_stop_w) !important;
+      min-width: var(--CLIP_stop_w) !important;
+      width: var(--CLIP_stop_w) !important;
+  }
+
+  #quicksettings #setting_code_former_weight {
+      --code_former_w: 156px;
+      max-width: var(--code_former_w) !important;
+      min-width: var(--code_former_w) !important;
+      width: var(--code_former_w) !important;
+  }
+
+  #quicksettings input[type="number"] {
+      width: 4em !important
+  }
+
+  #setting_sd_model_checkpoint > label > div > div.wrap-inner {
+      padding: 0 !important;
+  }
+  #setting_cross_attention_optimization > label > div > div.wrap-inner {
+      padding: 0 !important;
+  }
+  #setting_sd_model_checkpoint > label {
+      position: relative;
+      top: -5px !important;
+  }
+
+  #setting_sd_vae > label > div > div.wrap-inner {
+      padding: 0 !important;
+  }
+  #setting_sd_vae > setting_sd_vae > label {
+      top: 5px !important;
+  }
+  #quicksettings #setting_upcast_attn,
+  #quicksettings #setting_upcast_attn > label {
+      min-width: 0 !important;
+      width: 90px !important
+  }
+
+  #setting_hypertile_enable_unet_secondpass,
+  #setting_hypertile_enable_vae {
+      display: none !important;
+  }
+  #setting_do_not_show_images,
+  #setting_live_previews_enable,
+  #setting_do_not_show_images label,
+  #setting_live_previews_enable label {
+      --w: 140x;
+      width: var(--w) !important;
+      max-width: var(--w) !important;
+      min-width: var(--w) !important;
+      margin-right: 6px !important
+  }
+
+  #setting_upcast_attn {
+      padding: 0 !important;
+      margin: 0 !important;
+      position: absolute !important;
+      top: -2px;
+      right: 0px !important;
+  }
+
+  #setting_code_former_weight > div.wrap > div > input {
+      position: relative;
+      top: 8px !important;
+      padding: 0;
+      margin: 0;
+      right: 8px
+  }
+
+  #setting_cross_attention_optimization > label > span {
+      display: flex;
+  }
+  #hypertyle_checkbox {
+      width: fit-content !important;
+      margin-left: 10px;
+      cursor: pointer !important;
+  }
+  #hypertyle_checkbox * {
+      cursor: pointer !important;
+  }
+
+  .hypertyle {
+      position: relative;
+      display: inline-block;
+  }
+  .hypertyle > input[type=radio] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      padding: 0;
+      opacity: 0;
+  }
+  .hypertyle > input[type=radio] + i {
+      position: relative;
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      vertical-align: top;
+  }
+  .hypertyle > input[type=radio] + i,
+  .hypertyle > input[type=radio] + i:before,
+  .hypertyle > input[type=radio] + i:after {
+      transition: all 0.3s;
+  }
+  .hypertyle > input[type=radio]:first-child {
+      z-index: 10;
+  }
+  .hypertyle > input[type=radio]:first-child:checked {
+      z-index: 0;
+  }
+  .hypertyle > input[type=radio]:checked + input[type=radio] {
+      z-index: 10;
+  }
+  .hypertyle > input[type=radio]:checked + i + label,
+  .hypertyle > input[type=radio]:checked + i + label + label {
+      display: none;
+  }
+  .hypertyle > input[type=radio]:checked + input[type=radio] + i + label,
+  .hypertyle > input[type=radio]:checked + input[type=radio] + i + label + label + label {
+      display: none;
+  }
+  .hypertyle > input[type=radio]:checked + input[type=radio] + input[type=radio] + i + label + label,
+  .hypertyle > input[type=radio]:checked + input[type=radio] + input[type=radio] + i + label + label + label {
+      display: none;
+  }
+  .tristate-checkbox > input[type=radio] + i {
+      border: solid 2px var(--checkbox-border-color);
+      border-radius: 3px;
+  }
+  .tristate-checkbox > input[type=radio] + i:before {
+      content: " ";
+      display: block;
+      position: absolute;
+      left: -2px;
+      top: -2px;
+      right: -2px;
+      bottom: -2px;
+      background-color: var(--checkbox-border-color-hover);
+      border-radius: 3px;
+  }
+  .tristate-checkbox > input[type=radio] + i:after {
+      content: " ";
+      display: block;
+      position: absolute;
+      left: 2px;
+      top: 6px;
+      color: white;
+      border-bottom: solid 3px;
+      opacity: 0;
+  }
+  .tristate-checkbox > input[type=radio]:checked + i {
+      background-color: var(--checkbox-background-color-selected);
+  }
+  .tristate-checkbox > input[type=radio]:checked + i:before {
+      background-color: var(--checkbox-background-color-selected);
+  }
+  .tristate-checkbox > input[type=radio]:checked + i:after {
+      left: 2px;
+      top: 4px;
+      width: 9px;
+      height: 5px;
+      border-left: solid 3px;
+      border-bottom: solid 3px;
+      transform: rotate(-45deg);
+      opacity: 1;
+  }
+  .tristate-checkbox > input[type=radio]:checked + input[type=radio] + i:after {
+      width: 10px;
+      height: 0px;
+      border-left: none;
+      border-bottom: solid 3px;
+      transform: rotate(0);
+      opacity: 1;
+  }
+  .tristate-checkbox > input[type=radio]:checked + input[type=radio] + input[type=radio] + i:before {
+      opacity: 0;
+      transform: scale(0);
+  }
+
+  #quicksettings {
+      justify-content: center;
+      margin: 30px 0;
+  }
+  #quicksettings > button.tool {
+      padding: 0!important;
+      margin: 0 10px 0 0px!important;
+      border: none!important;
+      gap: 0!important;
+      min-width: 0px!important;
+      max-width: 0px!important;
+      width: 0px!important;
+  }
+        `;
+  const BodyStyle = document.createElement('style');
+  document.querySelector("body").appendChild(BodyStyle);
+  BodyStyle.insertAdjacentHTML("beforeend", styles);
   // новый инлайн-стиль body
 
   const bodystyle = "background: var(--body-background-fill) !important; margin: 0 !important; padding: 0 !important; top: 0 !important; left: 0 !important;";
@@ -817,93 +841,111 @@ function moving_quicksettings() {
             }
           });
 
-          const header = document.createElement('h3');
-          header.classList.add('header_settings');
-          header.textContent = 'быстрые настройки:';
-          quickSettings.insertAdjacentHTML('afterbegin', header.outerHTML);
+
           footer_div.parentNode.insertBefore(quickSettings, footer_div);
           // перемещение и правки доп.настроек параметров генерации
           var bkhrfix = document.querySelector("#txt2img_settings #setting_save_images_before_highres_fix").parentElement.parentElement.parentElement.parentElement;
           var txt2img_hr = document.querySelector("#txt2img_hr > div:nth-child(3) > div > div.form");
           txt2img_hr.appendChild(bkhrfix);
-          var txtModels = document.querySelector("#txt2img_settings #setting_sd_model_checkpoint").parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
-          var txtSets = document.querySelector("#sampler_selection_txt2img");
-          txtSets.prepend(txtModels);
-          document.querySelector("#txt2img_sampling").parentElement.style.flexGrow = "1";
 
-          var imgModels = document.querySelector("#img2img_settings #setting_sd_model_checkpoint").parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
-          var imgSets = document.querySelector("#sampler_selection_img2img");
-          imgSets.prepend(imgModels);
-          document.querySelector("#img2img_sampling").parentElement.style.flexGrow = "1";
+          const VAEfp32 = document.getElementById("setting_auto_vae_precision");
+          VAEfp32.querySelector("label > span").textContent = "fp32";
+          const cusomVAE = document.getElementById("setting_sd_vae_overrides_per_model_preferences");
+          cusomVAE.querySelector("label > span").textContent = "VAE";
+          const VAEsetting = document.getElementById("setting_sd_vae");
+          const VAEcheckboxes = document.createElement("div");
+          VAEcheckboxes.id = "vae_checkboxes";
+          VAEcheckboxes.appendChild(cusomVAE);
+          VAEcheckboxes.appendChild(VAEfp32);
+          VAEsetting.querySelector("label").insertBefore(VAEcheckboxes, VAEsetting.querySelector("label > span").nextSibling);
+          VAEsetting.querySelector("label > span").remove();
+          const TAESDcontainer = document.createElement('div');
+          TAESDcontainer.innerHTML = '<div id="setting_taesd" class="block gradio-checkbox svelte-90oupt padded" style="border-style: solid; overflow: visible; min-width: min(160px, 100%); border-width: var(--block-border-width);"><label class="svelte-1ojmf70"><input type="checkbox" name="test" data-testid="checkbox" class="svelte-1ojmf70"> <span class="ml-2 svelte-1ojmf70">taesd</span></label></div>';
+          TAESDcontainer.querySelector('input[type="checkbox"]').addEventListener('change', function() {
+              if (this.checked) {
+                  document.querySelector('#setting_sd_vae_encode_method > div > label[data-testid="TAESD-radio-label"]').click();
+              document.querySelector('#setting_sd_vae_decode_method > div > label[data-testid="TAESD-radio-label"]').click();
+              } else {
+                  document.querySelector('#setting_sd_vae_encode_method > div > label[data-testid="Full-radio-label"]').click();
+              document.querySelector('#setting_sd_vae_decode_method > div > label[data-testid="Full-radio-label"]').click();
+              }
+          });
+          VAEcheckboxes.appendChild(TAESDcontainer.firstChild);
+          
+          setTimeout(() => {
+            var checkbox = document.querySelector("#setting_taesd > label > input");
+            var radioTAESDEncode = document.querySelector('#setting_sd_vae_encode_method > div > label[data-testid="TAESD-radio-label"] > input');
+            var radioTAESDDecode = document.querySelector('#setting_sd_vae_decode_method > div > label[data-testid="TAESD-radio-label"] > input');
+            var radioFullEncode = document.querySelector('#setting_sd_vae_encode_method > div > label[data-testid="Full-radio-label"] > input');
+            var radioFullDecode = document.querySelector('#setting_sd_vae_decode_method > div > label[data-testid="Full-radio-label"] > input');
+            if (radioTAESDEncode.checked && radioTAESDDecode.checked) {
+                checkbox.checked = true;
+            } else if (radioFullEncode.checked && radioFullDecode.checked) {
+                checkbox.checked = false;
+            }
+            radioTAESDEncode.addEventListener('change', updateCheckbox);
+            radioTAESDDecode.addEventListener('change', updateCheckbox);
+            radioFullEncode.addEventListener('change', updateCheckbox);
+            radioFullDecode.addEventListener('change', updateCheckbox);
+            }, 3000);
+          
+          const upcastAttnDiv = document.getElementById('setting_upcast_attn');
+          const sdModelCheckpointLabel = document.querySelector('div#setting_sd_model_checkpoint > label');
+          const sdModelCheckpoinSpan = sdModelCheckpointLabel.querySelector('span');
+          sdModelCheckpoinSpan.insertAdjacentElement('afterend', upcastAttnDiv);
+                    
+          const CrossAttnSpan = document.querySelector("#setting_cross_attention_optimization > label > span");
+          const tempdiv = document.createElement('div');
+          tempdiv.innerHTML = '<div id="hypertyle_checkbox"><span class="hypertyle tristate-checkbox"><input type="radio" id="ht-state-none" name="ht" value="-1"><input type="radio" id="ht-state-vae" name="ht" value="0"><input type="radio" id="ht-state-vae_unet" name="ht" value="1"><i></i><label for="ht-state-vae"><s>hypertyle</s></label><label for="ht-state-vae_unet">hyeprtyle vae</label><label for="ht-state-none">hypertyle vae+unet</label></span></div>';
+          const hypertyleCheckboxDiv = tempdiv.firstElementChild;
+          CrossAttnSpan.appendChild(hypertyleCheckboxDiv);
+          
+          const hypertileVaeCheckbox = document.querySelector("#setting_hypertile_enable_vae > label > input");
+          const hypertileUnetCheckbox = document.querySelector("#setting_hypertile_enable_unet_secondpass > label > input");
+          const radioNone = document.getElementById('ht-state-none');
+          const radioVae = document.getElementById('ht-state-vae');
+          const radioVaeUnet = document.getElementById('ht-state-vae_unet');
+          function updateRadioButtons() {
+            if (hypertileVaeCheckbox.checked && hypertileUnetCheckbox.checked) {
+              radioVaeUnet.click();
+            } else if (hypertileVaeCheckbox.checked) {
+              radioVae.click();
+            } else {
+              radioNone.click();
+            }
+          }
+          function updateCheckboxes() {
+            if (radioVaeUnet.checked) {
+              if (!hypertileVaeCheckbox.checked) hypertileVaeCheckbox.click();
+              if (!hypertileUnetCheckbox.checked) hypertileUnetCheckbox.click();
+            } else if (radioVae.checked) {
+              if (!hypertileVaeCheckbox.checked) hypertileVaeCheckbox.click();
+              if (hypertileUnetCheckbox.checked) hypertileUnetCheckbox.click();
+            } else {
+              if (hypertileVaeCheckbox.checked) hypertileVaeCheckbox.click();
+              if (hypertileUnetCheckbox.checked) hypertileUnetCheckbox.click();
+            }
+          }
+          hypertileVaeCheckbox.addEventListener('change', updateRadioButtons);
+          hypertileUnetCheckbox.addEventListener('change', updateRadioButtons);
+          radioNone.addEventListener('change', updateCheckboxes);
+          radioVae.addEventListener('change', updateCheckboxes);
+          radioVaeUnet.addEventListener('change', updateCheckboxes);
+          setTimeout(() => {
+          updateRadioButtons();
+          updateCheckboxes();
+          }, 3000);
+          document.querySelector("#setting_do_not_show_images").appendChild(document.querySelector("#setting_live_previews_enable"));
+          
 
-          var TXTVAEdencSet = document.querySelector("#txt2img_settings #setting_sd_vae_decode_method").parentElement.parentElement.parentElement.parentElement;
-          var TXTVAEencSet = document.querySelector("#txt2img_settings #setting_sd_vae_encode_method").parentElement.parentElement.parentElement.parentElement;
-          var TXTvaesets = document.createElement("div");
-          TXTvaesets.id = "vaesets";
-          TXTvaesets.style.display = "flex";
-          TXTvaesets.style.flexWrap = "nowrap";
-          TXTVAEencSet.style.width = "264px";
-          TXTVAEdencSet.style.width = "264px";
-          TXTVAEdencSet.parentNode.insertBefore(TXTvaesets, TXTVAEdencSet);
-          TXTvaesets.appendChild(TXTVAEdencSet);
-          TXTvaesets.appendChild(TXTVAEencSet);
+          const faceRestorationDiv = document.querySelector("#setting_face_restoration");
+          const CodeformerSliderSpan = document.querySelector("#setting_code_former_weight > div.wrap > div > label > span");
+          faceRestorationDiv.querySelector("label > span").textContent = 'codeformer';
+          CodeformerSliderSpan.textContent = '';
+          CodeformerSliderSpan.title = 'сила влияния codeformer: меньше = лучше!!!';
+          CodeformerSliderSpan.appendChild(faceRestorationDiv);
 
-          var txt_vae_fp32 = document.querySelector("#txt2img_settings #setting_auto_vae_precision").parentElement.parentElement.parentElement.parentElement;
-          var txt_vae_force = document.querySelector("#txt2img_settings #setting_sd_vae_overrides_per_model_preferences").parentElement.parentElement.parentElement.parentElement;
-          var txt_vae_selector = document.querySelector("#txt2img_settings #setting_sd_vae").parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
-          var txtVaeSelect = document.createElement("div");
-          txtVaeSelect.id = "txt_vae_select";
-          var txtVaeSelectCheck = document.createElement("div");
-          txtVaeSelectCheck.id = "txt_vae_select_check";
-          var txtVaeMode = document.createElement("div");
-          txtVaeMode.id = "txt_vae_mode";
-          txt_vae_selector.parentNode.insertBefore(txtVaeSelect, txt_vae_selector);
-          txtVaeSelectCheck.appendChild(txt_vae_selector);
-          txtVaeSelect.appendChild(txtVaeSelectCheck);
-          txtVaeSelect.appendChild(txtVaeMode);
-          txtVaeMode.appendChild(txt_vae_fp32);
-          txtVaeSelect.appendChild(TXTvaesets);
-          var txt_vae_selector_label = document.querySelector("#txt2img_settings #setting_sd_vae > label");
-          txt_vae_selector_label.insertBefore(txt_vae_force, txt_vae_selector_label.children[1]);
-          txt_vae_selector_label.insertBefore(txt_vae_fp32, txt_vae_selector_label.children[2]);
-          document.querySelector("#txt2img_settings #setting_sd_vae_overrides_per_model_preferences > label > span").textContent = "";
-          document.querySelector("#txt2img_settings #setting_auto_vae_precision > label > span").textContent = "авто fp32";
-          txt_vae_force.style.cssText = `width: 0px; height: 0px; margin: 0; padding: 0; position: relative; left: 50px; top: -30px;`;
-          txt_vae_fp32.style.cssText = `width: max-content; height: 0px; margin: 0; padding: 0; position: relative; left: 228px; top: -32.6px;`;
-          var IMGVAEdencSet = document.querySelector("#img2img_settings #setting_sd_vae_decode_method").parentElement.parentElement.parentElement.parentElement;
-          var IMGVAEencSet = document.querySelector("#img2img_settings #setting_sd_vae_encode_method").parentElement.parentElement.parentElement.parentElement;
-          var IMGvaesets = document.createElement("div");
-          IMGvaesets.id = "vaesets";
-          IMGvaesets.style.display = "flex";
-          IMGvaesets.style.flexWrap = "nowrap";
-          IMGVAEencSet.style.width = "264px";
-          IMGVAEdencSet.style.width = "264px";
-          IMGVAEdencSet.parentNode.insertBefore(IMGvaesets, IMGVAEdencSet);
-          IMGvaesets.appendChild(IMGVAEdencSet);
-          IMGvaesets.appendChild(IMGVAEencSet);
-          var img_vae_fp32 = document.querySelector("#img2img_settings #setting_auto_vae_precision").parentElement.parentElement.parentElement.parentElement;
-          var img_vae_force = document.querySelector("#img2img_settings #setting_sd_vae_overrides_per_model_preferences").parentElement.parentElement.parentElement.parentElement;
-          var img_vae_selector = document.querySelector("#img2img_settings #setting_sd_vae").parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
-          var imgVaeSelect = document.createElement("div");
-          imgVaeSelect.id = "img_vae_select";
-          var imgVaeSelectCheck = document.createElement("div");
-          imgVaeSelectCheck.id = "img_vae_select_check";
-          var imgVaeMode = document.createElement("div");
-          imgVaeMode.id = "img_vae_mode";
-          img_vae_selector.parentNode.insertBefore(imgVaeSelect, img_vae_selector);
-          imgVaeSelectCheck.appendChild(img_vae_selector);
-          imgVaeSelect.appendChild(imgVaeSelectCheck);
-          imgVaeSelect.appendChild(imgVaeMode);
-          imgVaeMode.appendChild(img_vae_fp32);
-          imgVaeSelect.appendChild(IMGvaesets);
-          var img_vae_selector_label = document.querySelector("#img2img_settings #setting_sd_vae > label");
-          img_vae_selector_label.insertBefore(img_vae_force, img_vae_selector_label.children[1]);
-          img_vae_selector_label.insertBefore(img_vae_fp32, img_vae_selector_label.children[2]);
-          document.querySelector("#img2img_settings #setting_sd_vae_overrides_per_model_preferences > label > span").textContent = "";
-          document.querySelector("#img2img_settings #setting_auto_vae_precision > label > span").textContent = "авто fp32";
-          img_vae_force.style.cssText = `width: 0px; height: 0px; margin: 0; padding: 0; position: relative; left: 50px; top: -30px;`;
-          img_vae_fp32.style.cssText = `width: max-content; height: 0px; margin: 0; padding: 0; position: relative; left: 228px; top: -32.6px;`;
-
+        
           var txt_SDXLlowaesthetic = document.querySelector("#txt2img_settings #setting_sdxl_refiner_low_aesthetic_score").parentElement.parentElement.parentElement.parentElement;
           var txt_SDXLhighaesthetic = document.querySelector("#txt2img_settings #setting_sdxl_refiner_high_aesthetic_score").parentElement.parentElement.parentElement.parentElement;
           var txt_refiner_cont = document.querySelector("#txt2img_settings #txt2img_enable > div:nth-child(3) > div");
@@ -933,61 +975,16 @@ function moving_quicksettings() {
           IMGsdxlscope.appendChild(img_SDXLhighaesthetic);
 
           document.querySelector("#txt2img_restore_progress").textContent = 'продолжить генерацию';
-          document.querySelector("#quicksettings #setting_lora_functional > label > span").textContent = 'legacy LORA';
           const clipSpan = document.querySelector("#quicksettings #setting_CLIP_stop_at_last_layers > div > div > label");
           clipSpan.textContent = 'CLIP-skip';
           const ImgOutputSpan = document.querySelector("#quicksettings #setting_do_not_show_images > label > span");
           ImgOutputSpan.textContent = 'откл. изображения';
           document.querySelector("#quicksettings #setting_upcast_attn > label > span").textContent = 'UNET fp32';
-          document.querySelector("#quicksettings #setting_use_old_scheduling > label > span").textContent = 'legacy prompt';
           const livepreviewSpan = document.querySelector("#quicksettings #setting_live_previews_enable > label > span");
           livepreviewSpan.textContent = 'лайвпревью';
-          document.querySelector("#setting_face_restoration > label > span").textContent = 'codeformer';
-          const codeformerSpan = document.querySelector("#quicksettings #setting_code_former_weight > div.wrap.svelte-1cl284s > div > label > span");
-          codeformerSpan.textContent = '';
-          codeformerSpan.title = 'сила влияния codeformer: меньше = лучше!!!';
-          const disableExtSpan = document.querySelector("#quicksettings #setting_disable_all_extensions > span");
-          if (disableExtSpan) {
-            disableExtSpan.textContent = 'все дополнения:';
-            document.querySelector("#quicksettings #setting_disable_all_extensions > div.wrap > label:nth-child(3)").style.display = 'none';
-            document.querySelector("#quicksettings #setting_disable_all_extensions > div.wrap > label:nth-child(1) > span").textContent = 'вкл.';
-            document.querySelector("#quicksettings #setting_disable_all_extensions > div.wrap > label:nth-child(2) > span").textContent = 'выкл.';
-          };
+                    
           document.querySelector("#hires_prompt > label > textarea").value = "high detail, sharpness, fine-textured, clarity, intricate, finely-detailed, accurate";
           document.querySelector("#hires_neg_prompt > label > textarea").value = "low detail, blurred, low quality, unfocused, fuzzy image, unclear, hazy, murky, indistinct";
-
-          var faceRestoration = document.querySelector("#quicksettings #setting_face_restoration");
-          var codeFormerWeight = document.querySelector("#quicksettings #setting_code_former_weight");
-          var codeformerParam = document.createElement("div");
-          codeformerParam.id = "codeformer_param";
-          faceRestoration.parentNode.insertBefore(codeformerParam, faceRestoration);
-          codeformerParam.appendChild(faceRestoration);
-          codeformerParam.appendChild(codeFormerWeight);
-
-          var legacyLora = document.querySelector("#quicksettings #setting_lora_functional");
-          var legacyPrompt = document.querySelector("#quicksettings #setting_use_old_scheduling");
-
-          var legacyParam = document.createElement("div");
-          legacyParam.id = "legacy_param";
-          legacyLora.parentNode.insertBefore(legacyParam, legacyLora);
-          legacyParam.appendChild(legacyLora);
-          legacyParam.appendChild(legacyPrompt);
-
-          var fp32attn = document.querySelector("#quicksettings #setting_upcast_attn");
-          var optimize = document.querySelector("#quicksettings #setting_cross_attention_optimization");
-          var crossAttnOpt = document.createElement("div");
-          crossAttnOpt.id = "cross_attn_param";
-          optimize.parentNode.insertBefore(crossAttnOpt, optimize);
-          crossAttnOpt.appendChild(optimize);
-          crossAttnOpt.appendChild(fp32attn);
-
-          var livepreview = document.querySelector("#quicksettings #setting_live_previews_enable");
-          var hideOutImg = document.querySelector("#quicksettings #setting_do_not_show_images");
-          var previewParam = document.createElement("div");
-          previewParam.id = "preview_param";
-          livepreview.parentNode.insertBefore(previewParam, livepreview);
-          previewParam.appendChild(livepreview);
-          previewParam.appendChild(hideOutImg);
 
           // установка шага слайдеров размера на 64px
           const SizeSliders = document.querySelectorAll('div[id$="_width"] > input[type=range], div[id$="_height"] > input[type=range]');
@@ -1058,7 +1055,7 @@ function replaceSymbols() {
       let node = childNodes[j];
       if (node.nodeType === 3) {
         let text = node.nodeValue;
-        let replacedText = text.replace(/🔄/g, '\uF021').replace(/♻️/g, '\uF1B8').replace(/🎲️/g, '\uF074').replace(/📐/g, '\uF61C').replace(/💾/g, '\uF0C7').replace(/🎨️/g, '\uF5A9').replace(/🖼️/g, '\uF03E').replace(/⇅/g, '\uE0A4').replace(/▼/g, '\uF078').replace(/🖌️/g, '\uF044').replace(/🏙️/g, '\uF070').replace(/🗑️/g, '\uF55A').replace(/↙️/g, '\uF0E2').replace(/📋/g, '\uF46C').replace(/🔒/g, '\uF023').replace(/💥/g, '\uF085').replace(/📝/g, '\uF319').replace(/📷/g, '\uE099');
+        let replacedText = text.replace(/🔄/g, '\uF021').replace(/♻️/g, '\uF1B8').replace(/🎲️/g, '\uF522').replace(/📐/g, '\uF61C').replace(/💾/g, '\uF0C7').replace(/🎨️/g, '\uF5A9').replace(/🖼️/g, '\uF03E').replace(/⇅/g, '\uE0A4').replace(/▼/g, '\uF078').replace(/🖌️/g, '\uF044').replace(/🏙️/g, '\uF070').replace(/🗑️/g, '\uF55A').replace(/↙️/g, '\uF0E2').replace(/📋/g, '\uF46C').replace(/🔒/g, '\uF023').replace(/💥/g, '\uF085').replace(/📝/g, '\uF319').replace(/📷/g, '\uE099');
 
         if (replacedText !== text) {
           element.classList.add('fa');
@@ -1095,7 +1092,7 @@ function inject_themes() {
     <option value="theme2">натруженный пролапс</option>
     <option value="theme3">минет под одеялом</option>
     <option value="theme4">некроз препуция</option>
-	  <option value="theme5">тоска по члену</option>
+      <option value="theme5">тоска по члену</option>
     <option value="theme6">фистинг баклажаном</option>
     <option value="theme7">кандидоз</option>
     <option value="">стандартная тема</option>
@@ -1107,7 +1104,7 @@ function inject_themes() {
   const styles = [
     `
 * { /* выделения содомии */
-	--background-fill-primary: #1a120e !important;
+    --background-fill-primary: #1a120e !important;
   --body-background-fill: #251a15 !important;
   --border-color-primary: #c2a878 !important;
   --input-background-fill: #1a120e !important;
@@ -1332,87 +1329,87 @@ filter: grayscale(1);
   `,
     `
   * {
-	/* кандидоз */
-	--background-fill-primary: #f8f8f8 !important;
-	--body-background-fill: #fbfbfb !important;
-	--border-color-primary: #6f6f6f !important;
-	--input-background-fill: #f6f6f6 !important;
-	--button-primary-border-color: #f53c03 !important;
-	--button-primary-background-fill: #ff9100 !important;
-	--background-fill-secondary: #eee !important;
-	--button-secondary-background-fill: #d1d1d1 !important;
-	--button-secondary-background-fill-hover: #fafafa !important;
-	--button-secondary-border-color: #c4c4c4 !important;
-	--checkbox-label-background-fill: #ff009700 !important;
-	--checkbox-background-color: #f9f9f9 !important;
-	--checkbox-background-color-selected: #0078fc !important;
-	--checkbox-border-color-focus: #002fff !important;
-	--checkbox-border-color-hover: #8e8e8e !important;
-	--checkbox-border-color-selected: #00d9ff !important;
-	--checkbox-label-background-fill-hover: #a2a2a2 !important;
-	--button-primary-background-fill-hover: #b1b1b1 !important;
-	--button-secondary-text-color: #000 !important;
-	--body-text-color: #000 !important;
-	--neutral-200: #595959 !important;
-	--hue-rotate-checkbox: 0deg;
-	--slider-background: #bcb8b8 !important;
-	--slider-thumb: #0078fc !important;
-	--slider-focus: #9c9c9c !important;
-	--slider-fill-lower: #0078fc !important;
+    /* кандидоз */
+    --background-fill-primary: #f8f8f8 !important;
+    --body-background-fill: #fbfbfb !important;
+    --border-color-primary: #6f6f6f !important;
+    --input-background-fill: #f6f6f6 !important;
+    --button-primary-border-color: #f53c03 !important;
+    --button-primary-background-fill: #ff9100 !important;
+    --background-fill-secondary: #eee !important;
+    --button-secondary-background-fill: #d1d1d1 !important;
+    --button-secondary-background-fill-hover: #fafafa !important;
+    --button-secondary-border-color: #c4c4c4 !important;
+    --checkbox-label-background-fill: #ff009700 !important;
+    --checkbox-background-color: #f9f9f9 !important;
+    --checkbox-background-color-selected: #0078fc !important;
+    --checkbox-border-color-focus: #002fff !important;
+    --checkbox-border-color-hover: #8e8e8e !important;
+    --checkbox-border-color-selected: #00d9ff !important;
+    --checkbox-label-background-fill-hover: #a2a2a2 !important;
+    --button-primary-background-fill-hover: #b1b1b1 !important;
+    --button-secondary-text-color: #000 !important;
+    --body-text-color: #000 !important;
+    --neutral-200: #595959 !important;
+    --hue-rotate-checkbox: 0deg;
+    --slider-background: #bcb8b8 !important;
+    --slider-thumb: #0078fc !important;
+    --slider-focus: #9c9c9c !important;
+    --slider-fill-lower: #0078fc !important;
 }
 #txt2img_prompt textarea,
 #img2img_prompt textarea {
-	color: #0a8e18!important;
+    color: #0a8e18!important;
 }
 #txt2img_neg_prompt textarea,
 #img2img_neg_prompt textarea {
-	color: #a11b1b!important;
+    color: #a11b1b!important;
 }
 a:hover {
-	color: #0078fc !important;
-	text-decoration: underline !important;
+    color: #0078fc !important;
+    text-decoration: underline !important;
 }
 ul.options {
-	background: #ddd !important;
+    background: #ddd !important;
 }
 li.selected.active {
-	background: #0078fc !important;
+    background: #0078fc !important;
 }
 div[id$=modal_for_waiting] {
-	background: #eee !important;
-	color: #000 !important;
+    background: #eee !important;
+    color: #000 !important;
 }
 div[id$=modal_for_waiting] p {
-	color: #000 !important;
+    color: #000 !important;
 }
 div[id$=modal_for_waiting] h1 {
-	color: #000 !important;
+    color: #000 !important;
 }
 div#colab_model_list {
-	background: #fbfbfb !important;
-	color: #0f0f0f !important;
+    background: #fbfbfb !important;
+    color: #0f0f0f !important;
 }
 div#colab_model_list p {
-	color: #0f0f0f !important;
+    color: #0f0f0f !important;
 }
 div#colab_model_list code {
-	background: none !important;
-	color: #39910e !important;
+    background: none !important;
+    color: #39910e !important;
 }
 .autocompleteResults {
-	border-radius: 0!important;
-	background-color: #e2e1e1 !important;
-	border: 1px solid #6f6f6f !important;
-	box-shadow: 0 0 10px #000;
+    border-radius: 0!important;
+    background-color: #e2e1e1 !important;
+    border: 1px solid #6f6f6f !important;
+    box-shadow: 0 0 10px #000;
 }
 .autocompleteResultsList > li:nth-child(odd) {
-	background-color: #fbfbfb !important;
+    background-color: #fbfbfb !important;
 }
 .autocompleteResultsList > li:hover {
-	background-color: #e4f3df !important;
+    background-color: #e4f3df !important;
 }
 body > gradio-app > div.up_arrow {
-	filter: invert(1)
+    filter: invert(1)
 }
   `,
     `/* стандартная тема */`,
@@ -1469,7 +1466,7 @@ function inject_fonts() {
     <option value="font2">Noto Sans Display</option>
     <option value="font3">Open Sans Condensed</option>
     <option value="font4">Fira Sans Condensed</option>
-	  <option value="font5">Roboto Flex</option>
+      <option value="font5">Roboto Flex</option>
     <option value="font6">PT Sans Narrow</option>
     <option value="font7">System</option>
   </select>`;
@@ -1785,4 +1782,3 @@ onUiLoaded(function () {
   colab_timer();
   PenisUp()
 });
-
