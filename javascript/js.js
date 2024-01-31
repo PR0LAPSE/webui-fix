@@ -861,45 +861,48 @@ function moving_quicksettings() {
           VAEsetting.querySelector("label > span").remove();
           const TAESDcontainer = document.createElement('div');
           TAESDcontainer.innerHTML = '<div id="setting_taesd" class="block gradio-checkbox svelte-90oupt padded" style="border-style: solid; overflow: visible; min-width: min(160px, 100%); border-width: var(--block-border-width);"><label class="svelte-1ojmf70"><input type="checkbox" name="test" data-testid="checkbox" class="svelte-1ojmf70"> <span class="ml-2 svelte-1ojmf70">taesd</span></label></div>';
-          TAESDcontainer.querySelector('input[type="checkbox"]').addEventListener('change', function() {
-              if (this.checked) {
-                  document.querySelector('#setting_sd_vae_encode_method > div > label[data-testid="TAESD-radio-label"]').click();
+          TAESDcontainer.querySelector('input[type="checkbox"]').addEventListener('change', function () {
+            if (this.checked) {
+              document.querySelector('#setting_sd_vae_encode_method > div > label[data-testid="TAESD-radio-label"]').click();
               document.querySelector('#setting_sd_vae_decode_method > div > label[data-testid="TAESD-radio-label"]').click();
-              } else {
-                  document.querySelector('#setting_sd_vae_encode_method > div > label[data-testid="Full-radio-label"]').click();
+            } else {
+              document.querySelector('#setting_sd_vae_encode_method > div > label[data-testid="Full-radio-label"]').click();
               document.querySelector('#setting_sd_vae_decode_method > div > label[data-testid="Full-radio-label"]').click();
-              }
+            }
           });
           VAEcheckboxes.appendChild(TAESDcontainer.firstChild);
-          
+
           setTimeout(() => {
             var checkbox = document.querySelector("#setting_taesd > label > input");
             var radioTAESDEncode = document.querySelector('#setting_sd_vae_encode_method > div > label[data-testid="TAESD-radio-label"] > input');
             var radioTAESDDecode = document.querySelector('#setting_sd_vae_decode_method > div > label[data-testid="TAESD-radio-label"] > input');
             var radioFullEncode = document.querySelector('#setting_sd_vae_encode_method > div > label[data-testid="Full-radio-label"] > input');
             var radioFullDecode = document.querySelector('#setting_sd_vae_decode_method > div > label[data-testid="Full-radio-label"] > input');
-            if (radioTAESDEncode.checked && radioTAESDDecode.checked) {
+            function updateCheckbox() {
+              if (radioTAESDEncode.checked && radioTAESDDecode.checked) {
                 checkbox.checked = true;
-            } else if (radioFullEncode.checked && radioFullDecode.checked) {
+              } else if (radioFullEncode.checked && radioFullDecode.checked) {
                 checkbox.checked = false;
-            }
+              }
+            };
             radioTAESDEncode.addEventListener('change', updateCheckbox);
             radioTAESDDecode.addEventListener('change', updateCheckbox);
             radioFullEncode.addEventListener('change', updateCheckbox);
             radioFullDecode.addEventListener('change', updateCheckbox);
-            }, 3000);
-          
+            updateCheckbox();
+          }, 3000);
+
           const upcastAttnDiv = document.getElementById('setting_upcast_attn');
           const sdModelCheckpointLabel = document.querySelector('div#setting_sd_model_checkpoint > label');
           const sdModelCheckpoinSpan = sdModelCheckpointLabel.querySelector('span');
           sdModelCheckpoinSpan.insertAdjacentElement('afterend', upcastAttnDiv);
-                    
+
           const CrossAttnSpan = document.querySelector("#setting_cross_attention_optimization > label > span");
           const tempdiv = document.createElement('div');
           tempdiv.innerHTML = '<div id="hypertyle_checkbox"><span class="hypertyle tristate-checkbox"><input type="radio" id="ht-state-none" name="ht" value="-1"><input type="radio" id="ht-state-vae" name="ht" value="0"><input type="radio" id="ht-state-vae_unet" name="ht" value="1"><i></i><label for="ht-state-vae"><s>hypertyle</s></label><label for="ht-state-vae_unet">hyeprtyle vae</label><label for="ht-state-none">hypertyle vae+unet</label></span></div>';
           const hypertyleCheckboxDiv = tempdiv.firstElementChild;
           CrossAttnSpan.appendChild(hypertyleCheckboxDiv);
-          
+
           const hypertileVaeCheckbox = document.querySelector("#setting_hypertile_enable_vae > label > input");
           const hypertileUnetCheckbox = document.querySelector("#setting_hypertile_enable_unet_secondpass > label > input");
           const radioNone = document.getElementById('ht-state-none');
@@ -932,11 +935,11 @@ function moving_quicksettings() {
           radioVae.addEventListener('change', updateCheckboxes);
           radioVaeUnet.addEventListener('change', updateCheckboxes);
           setTimeout(() => {
-          updateRadioButtons();
-          updateCheckboxes();
+            updateRadioButtons();
+            updateCheckboxes();
           }, 3000);
           document.querySelector("#setting_do_not_show_images").appendChild(document.querySelector("#setting_live_previews_enable"));
-          
+
 
           const faceRestorationDiv = document.querySelector("#setting_face_restoration");
           const CodeformerSliderSpan = document.querySelector("#setting_code_former_weight > div.wrap > div > label > span");
@@ -945,7 +948,7 @@ function moving_quicksettings() {
           CodeformerSliderSpan.title = 'сила влияния codeformer: меньше = лучше!!!';
           CodeformerSliderSpan.appendChild(faceRestorationDiv);
 
-        
+
           var txt_SDXLlowaesthetic = document.querySelector("#txt2img_settings #setting_sdxl_refiner_low_aesthetic_score").parentElement.parentElement.parentElement.parentElement;
           var txt_SDXLhighaesthetic = document.querySelector("#txt2img_settings #setting_sdxl_refiner_high_aesthetic_score").parentElement.parentElement.parentElement.parentElement;
           var txt_refiner_cont = document.querySelector("#txt2img_settings #txt2img_enable > div:nth-child(3) > div");
@@ -982,7 +985,7 @@ function moving_quicksettings() {
           document.querySelector("#quicksettings #setting_upcast_attn > label > span").textContent = 'UNET fp32';
           const livepreviewSpan = document.querySelector("#quicksettings #setting_live_previews_enable > label > span");
           livepreviewSpan.textContent = 'лайвпревью';
-                    
+
           document.querySelector("#hires_prompt > label > textarea").value = "high detail, sharpness, fine-textured, clarity, intricate, finely-detailed, accurate";
           document.querySelector("#hires_neg_prompt > label > textarea").value = "low detail, blurred, low quality, unfocused, fuzzy image, unclear, hazy, murky, indistinct";
 
